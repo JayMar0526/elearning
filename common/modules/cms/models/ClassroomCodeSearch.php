@@ -18,7 +18,7 @@ class ClassroomCodeSearch extends ClassroomCode
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'user_id'], 'integer'],
             [['code'], 'safe'],
         ];
     }
@@ -42,6 +42,9 @@ class ClassroomCodeSearch extends ClassroomCode
     public function search($params)
     {
         $query = ClassroomCode::find();
+        if(Yii::$app->user->can('Teacher')){
+            $query->andFilterWhere(['user_id' => Yii::$app->user->id]);
+        }
 
         // add conditions that should always apply here
 
@@ -60,6 +63,7 @@ class ClassroomCodeSearch extends ClassroomCode
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'user_id' => $this->user_id,
         ]);
 
         $query->andFilterWhere(['like', 'code', $this->code]);

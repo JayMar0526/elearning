@@ -31,6 +31,7 @@ class ClassroomCode extends \yii\db\ActiveRecord
             [['code'], 'required'],
             [['code'], 'string', 'max' => 45],
             [['code'], 'unique'],
+            [['user_id'], 'integer'],
         ];
     }
 
@@ -42,6 +43,7 @@ class ClassroomCode extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'code' => 'Code',
+            'user_id' => 'User',
         ];
     }
 
@@ -51,5 +53,16 @@ class ClassroomCode extends \yii\db\ActiveRecord
     public function getStudents()
     {
         return $this->hasMany(Student::className(), ['cr_id' => 'id']);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if($insert){
+                $this->user_id = Yii::$app->user->id;
+            }
+            return true;            
+        }
+        return false;
     }
 }
