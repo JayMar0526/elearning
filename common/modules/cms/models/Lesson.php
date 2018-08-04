@@ -31,6 +31,7 @@ class Lesson extends \yii\db\ActiveRecord
         return [
             [['title', 'code'], 'required'],
             [['title', 'code'], 'string', 'max' => 45],
+            [['purpose'], 'safe'],
         ];
     }
 
@@ -42,7 +43,17 @@ class Lesson extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'purpose' => 'Layunin',
             'code' => 'Code',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'fileBehavior' => [
+                'class' => \file\behaviors\FileBehavior::className()
+            ]
         ];
     }
 

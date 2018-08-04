@@ -152,6 +152,65 @@ INSERT INTO `cr_code` VALUES (1,'Maaasahan',3),(2,'Mabuti',1),(3,'Mapagkakatiwal
 UNLOCK TABLES;
 
 --
+-- Table structure for table `file`
+--
+
+DROP TABLE IF EXISTS `file`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `file` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `itemId` int(11) NOT NULL,
+  `hash` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `mime` varchar(255) NOT NULL,
+  `is_main` tinyint(1) DEFAULT '0',
+  `date_upload` int(11) DEFAULT NULL,
+  `sort` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `file_model` (`model`),
+  KEY `file_item_id` (`itemId`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `file`
+--
+
+LOCK TABLES `file` WRITE;
+/*!40000 ALTER TABLE `file` DISABLE KEYS */;
+INSERT INTO `file` VALUES (8,'Picture1','Topic',1,'32e9bc15f8c848b7748b79ca3877f0a7',53231,'png','image/png',0,1533384466,1);
+/*!40000 ALTER TABLE `file` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lesson_category`
+--
+
+DROP TABLE IF EXISTS `lesson_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lesson_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lesson_category`
+--
+
+LOCK TABLES `lesson_category` WRITE;
+/*!40000 ALTER TABLE `lesson_category` DISABLE KEYS */;
+INSERT INTO `lesson_category` VALUES (1,'Panimula'),(2,'Alamin Natin'),(3,'Isagawa Natin'),(4,'Isapuso Natin'),(5,'Isabuhay Natin'),(6,'Subukin Natin'),(7,'Takdang Aralin');
+/*!40000 ALTER TABLE `lesson_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `lessons`
 --
 
@@ -161,9 +220,10 @@ DROP TABLE IF EXISTS `lessons`;
 CREATE TABLE `lessons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `purpose` text COLLATE utf8_unicode_ci NOT NULL,
   `code` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,6 +232,7 @@ CREATE TABLE `lessons` (
 
 LOCK TABLES `lessons` WRITE;
 /*!40000 ALTER TABLE `lessons` DISABLE KEYS */;
+INSERT INTO `lessons` VALUES (1,'Mga Bilang na Odd at Even','<p><strong>Layunin:&nbsp;</strong><em>Natutukoy ang mga bilang na odd at even</em></p>','oddeven');
 /*!40000 ALTER TABLE `lessons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +256,7 @@ CREATE TABLE `migration` (
 
 LOCK TABLES `migration` WRITE;
 /*!40000 ALTER TABLE `migration` DISABLE KEYS */;
-INSERT INTO `migration` VALUES ('m000000_000000_base',1533208716),('m130524_201442_init',1533208719),('m140209_132017_init',1533210643),('m140403_174025_create_account_table',1533210645),('m140504_113157_update_tables',1533210649),('m140504_130429_create_token_table',1533210709),('m140506_102106_rbac_init',1533372399),('m140830_171933_fix_ip_field',1533210711),('m140830_172703_change_account_table_name',1533210711),('m141222_110026_update_ip_field',1533210712),('m141222_135246_alter_username_length',1533210713),('m150614_103145_update_social_account_table',1533210716),('m150623_212711_fix_username_notnull',1533210717),('m151218_234654_add_timezone_to_profile',1533210717),('m160929_103127_add_last_login_at_to_user_table',1533210718),('m170907_052038_rbac_add_index_on_auth_assignment_user_id',1533372400);
+INSERT INTO `migration` VALUES ('m000000_000000_base',1533208716),('m130524_201442_init',1533208719),('m140209_132017_init',1533210643),('m140403_174025_create_account_table',1533210645),('m140504_113157_update_tables',1533210649),('m140504_130429_create_token_table',1533210709),('m140506_102106_rbac_init',1533372399),('m140830_171933_fix_ip_field',1533210711),('m140830_172703_change_account_table_name',1533210711),('m141222_110026_update_ip_field',1533210712),('m141222_135246_alter_username_length',1533210713),('m150127_040544_files',1533381355),('m150614_103145_update_social_account_table',1533210716),('m150623_212711_fix_username_notnull',1533210717),('m151218_234654_add_timezone_to_profile',1533210717),('m160929_103127_add_last_login_at_to_user_table',1533210718),('m170907_052038_rbac_add_index_on_auth_assignment_user_id',1533372400);
 /*!40000 ALTER TABLE `migration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,14 +506,17 @@ DROP TABLE IF EXISTS `topic`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `topic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
   `lesson_id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `passing_grade` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `instruction` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lesson_id` (`lesson_id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `category_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `lesson_category` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `topic_ibfk_1` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,6 +525,7 @@ CREATE TABLE `topic` (
 
 LOCK TABLES `topic` WRITE;
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
+INSERT INTO `topic` VALUES (1,1,1,'Magsanay Tayo','3','Panuto: Alin ang mas malaking bilang? I- click ang katabing bilog ng bilang na tamang sagot.'),(2,1,1,'Balik Aralan Natin','3','Ibigay ang kabuuang bilang. I-click ang titik na tamang sagot.'),(3,1,1,'Maglaro Tayo','','\"Putukin and Lobo\"\r\n\r\nPanuto: \r\n1. Ipangkat ang klase sa 4. Bawat pangkat ay bibigyan ng 10 lobo na may lamang bilang sa loob na dapat putukin. \r\n2. Ang mga bilang sa loob ay ilalagay sa tsart ng bilang na maaaring hatiin sa dalawa at tsart ng bilang na hindi maaaring\r\nhatiin sa dalawa.\r\n3. Ang pangkat na maraming naputok at nailagay sa tamang tsart sa loob ng 3 minuto ang tatanghaling panalo.\r\n'),(4,2,1,'Ang SOLUSYON sa PROBLEMA?','','Ang klase ni Gng. Santos ay sasali sa isang palatuntunan ng paaralan kung kaya’t pinapila niya ang kaniyang mag-aaral sa dalawang \r\nhanay. Kasama niya ang 24 na mag-aaral, kung papahanayin niya ang mga bata sa dalawang linya, lahat ba ay magkakaroon ng \r\nkapareha? Bakit? Paano kung ang bilang ng mag-aaral ay 23 lamang, lahat ba ng bata ay magkakaroon ng kapareha? Bakit?\r\n'),(5,2,1,'Basahin at unawain','','• Lahat ng mga bilang na even ay may kapares.\r\n• Lahat ng mga bilang na odd ay may isang walang kapares.\r\n\r\n• Ang mga bilang na even ay nagtatapos sa 0, 2, 4, 6 o 8.\r\n• Ang mga bilang na odd ay nagtatapos sa 1, 3, 5, 7, o 9.\r\n\r\nMaaaring nalaman kung Odd o Even ang bilang ng kabuuan.\r\nHalimbawa:\r\n✔ 2 + 6 =  8	Ang kabuuan ng dalawang even na bilang ay 		Even.\r\n✔ 5 + 9 = 14	Ang kabuuan ng dalawang odd na bilang ay 			Even.\r\n✔ 2 + 5 =  7	Ang kabuuan ng isang even at isang odd na bilang 		ay Odd.\r\n'),(6,3,1,'Odd or Even','5','Panuto: Suriin ang bawat bilang kung ito ay odd o even.\r\n'),(7,4,1,'Tandaan mo ako!','','◘ Ano ang mga bilang na even?\r\n✔ Lahat ng mga bilang na even ay may kapares.\r\n✔ Ang mga bilang na even ay nagtatapos sa 0, 2, 4, 6 o 8.\r\n✔ Ang kabuuan ng dalawang even na bilang ay Even.\r\n✔ Ang kabuuan ng dalawang odd na bilang ay Even.\r\n\r\n◘ Ano ang mga bilang na odd?\r\n✔ Lahat ng mga bilang na odd ay may isang walang kapares.\r\n✔ Ang mga bilang na odd ay nagtatapos sa 1, 3, 5, 7, o 9.\r\n✔ Ang kabuuan ng isang even at isang odd na bilang ay Odd.\r\n'),(8,5,1,'Sino AKO?','3','Ginabayang Gawain\r\nPanuto: Tukuyin ang bilang na isinasaad sa sumusunod na sitwasyon. Isulat ang tamang sagot sa patlang.\r\n'),(9,5,1,'Alin ang TAMA?','3','Indibidwal na Gawain\r\nPanuto: I-Click ang button sa unahan ng titik ng tamang sagot.\r\n'),(10,6,1,'Piliing MABUTI!','3','Panuto: Tukuyin kung ang bilang ay Odd o Even. Pindutin ang bilog ng napiling sagot.\r\n'),(11,7,1,'Magandang HALIMBAWA!','','Panuto: Magbigay ng 10 halimbawa ng bilang na Odd at 10 halimbawa ng bilang na Even.\r\n');
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -535,4 +600,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-04 18:00:12
+-- Dump completed on 2018-08-04 21:40:16

@@ -34,11 +34,12 @@ class Topic extends \yii\db\ActiveRecord
     {
         return [
             [['lesson_id', 'title', 'instruction'], 'required'],
-            [['lesson_id'], 'integer'],
+            [['lesson_id', 'category_id'], 'integer'],
             [['instruction'], 'string'],
             [['title'], 'string', 'max' => 255],
             [['passing_grade'], 'string', 'max' => 45],
-            [['lesson_id'], 'exist', 'skipOnError' => true, 'targetClass' => Lessons::className(), 'targetAttribute' => ['lesson_id' => 'id']],
+            [['lesson_id'], 'exist', 'skipOnError' => true, 'targetClass' => Lesson::className(), 'targetAttribute' => ['lesson_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => LessonCategory::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
 
@@ -49,10 +50,20 @@ class Topic extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'category_id' => 'Category',
             'lesson_id' => 'Lesson ID',
             'title' => 'Title',
             'passing_grade' => 'Passing Grade',
-            'instruction' => 'Instruction',
+            'instruction' => 'Panuto',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'fileBehavior' => [
+                'class' => \file\behaviors\FileBehavior::className()
+            ]
         ];
     }
 
@@ -77,6 +88,14 @@ class Topic extends \yii\db\ActiveRecord
      */
     public function getLesson()
     {
-        return $this->hasOne(Lessons::className(), ['id' => 'lesson_id']);
+        return $this->hasOne(Lesson::className(), ['id' => 'lesson_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLessonCategory()
+    {
+        return $this->hasOne(LessonCategory::className(), ['id' => 'category_id']);
     }
 }

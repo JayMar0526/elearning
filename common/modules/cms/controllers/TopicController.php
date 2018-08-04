@@ -3,16 +3,16 @@
 namespace common\modules\cms\controllers;
 
 use Yii;
-use common\modules\cms\models\Student;
-use common\modules\cms\models\StudentSearch;
+use common\modules\cms\models\Topic;
+use common\modules\cms\models\TopicSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StudentController implements the CRUD actions for Student model.
+ * TopicController implements the CRUD actions for Topic model.
  */
-class StudentController extends Controller
+class TopicController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class StudentController extends Controller
     }
 
     /**
-     * Lists all Student models.
+     * Lists all Topic models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StudentSearch();
+        $searchModel = new TopicSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Displays a single Student model.
+     * Displays a single Topic model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,7 +61,6 @@ class StudentController extends Controller
                 'model' => $this->findModel($id),
             ]);
         }
-        
     }
 
     /**
@@ -69,20 +68,20 @@ class StudentController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreateStudent()
+    public function actionCreateTopic()
     {
-        $model = new Student();
-        $classroomId = Yii::$app->request->queryParams['id'];
+        $model = new Topic();
+        $lessonId = Yii::$app->request->queryParams['id'];
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->cr_id = $classroomId;
+            $model->lesson_id = $lessonId;
 
             if($model->save()){
-                \Yii::$app->getSession()->setFlash('success', 'New student successfully save.');
+                \Yii::$app->getSession()->setFlash('success', 'New topic successfully save.');
             }else{
                 \Yii::$app->getSession()->setFlash('warning', 'New student failed to save.');
             }            
-            return $this->redirect(['/cms/classroom/view', 'id' => $classroomId]);
+            return $this->redirect(['/cms/lesson/view', 'id' => $lessonId]);
         }
 
         if(Yii::$app->request->isAjax){
@@ -98,15 +97,15 @@ class StudentController extends Controller
     }
 
     /**
-     * Creates a new Student model.
+     * Creates a new Topic model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Student();
-        
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {          
+        $model = new Topic();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -116,7 +115,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Updates an existing Student model.
+     * Updates an existing Topic model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -127,7 +126,6 @@ class StudentController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            // return $this->redirect(['view', 'id' => $model->id]);
             \Yii::$app->getSession()->setFlash('success', 'You have successfully updated the record.');
             return $this->redirect(Yii::$app->request->referrer);
         }
@@ -140,11 +138,10 @@ class StudentController extends Controller
                 'model' => $model,
             ]);
         }
-        
     }
 
     /**
-     * Deletes an existing Student model.
+     * Deletes an existing Topic model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -155,20 +152,18 @@ class StudentController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-        \Yii::$app->getSession()->setFlash('success', 'You have successfully deleted the record.');
-        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
-     * Finds the Student model based on its primary key value.
+     * Finds the Topic model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Student the loaded model
+     * @return Topic the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Student::findOne($id)) !== null) {
+        if (($model = Topic::findOne($id)) !== null) {
             return $model;
         }
 

@@ -4,8 +4,119 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb20c64ba0d45b46ad5bf16415866488",
+    "content-hash": "9a000de34cbc6ceec1c2264ead8ce718",
     "packages": [
+        {
+            "name": "2amigos/yii2-tinymce-widget",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-tinymce-widget.git",
+                "reference": "4f519e37774ef231e4b4d6046854d5638548c8e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-tinymce-widget/zipball/4f519e37774ef231e4b4d6046854d5638548c8e0",
+                "reference": "4f519e37774ef231e4b4d6046854d5638548c8e0",
+                "shasum": ""
+            },
+            "require": {
+                "tinymce/tinymce": ">=4",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\tinymce\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TinyMCE widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/tinymce-widget",
+            "keywords": [
+                "2amigos",
+                "extension",
+                "tinymce",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2017-06-09T14:12:14+00:00"
+        },
+        {
+            "name": "axelpal/yii2-attachments",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AxelPAL/yii2-attachments.git",
+                "reference": "28cf8ce8c05f6caa5b95e4299af21f8b4a2b3d40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxelPAL/yii2-attachments/zipball/28cf8ce8c05f6caa5b95e4299af21f8b4a2b3d40",
+                "reference": "28cf8ce8c05f6caa5b95e4299af21f8b4a2b3d40",
+                "shasum": ""
+            },
+            "require": {
+                "himiklab/yii2-colorbox-widget": "*",
+                "kartik-v/yii2-widget-fileinput": "v1.0.3",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-jui": "^2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "file\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-4-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alimzhan Abuov aka Nemmo",
+                    "email": "alimzhan.abu@yandex.kz"
+                },
+                {
+                    "name": "Alexander Palchikov aka AxelPAL",
+                    "email": "axelpal@gmail.com"
+                }
+            ],
+            "description": "Extension for file uploading and attaching to the models",
+            "keywords": [
+                "attachment",
+                "extension",
+                "file",
+                "upload",
+                "yii2"
+            ],
+            "time": "2016-04-12T07:16:51+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
@@ -63,6 +174,47 @@
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/77d2a51d0520d2ee44173afdf4e40a9201f5964e",
                 "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e",
                 "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery-colorbox",
+            "version": "1.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jackmoore/colorbox.git",
+                "reference": "bac78120c6ca9e63370cc317ab6f400129cd6608"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jackmoore/colorbox/zipball/bac78120c6ca9e63370cc317ab6f400129cd6608",
+                "reference": "bac78120c6ca9e63370cc317ab6f400129cd6608",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.3.2"
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/jquery-ui",
+            "version": "1.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jqueryui.git",
+                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/44ecf3794cc56b65954cc19737234a3119d036cc",
+                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6"
             },
             "type": "bower-asset",
             "license": [
@@ -327,6 +479,204 @@
             "time": "2018-02-23T01:58:20+00:00"
         },
         {
+            "name": "himiklab/yii2-colorbox-widget",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/himiklab/yii2-colorbox-widget.git",
+                "reference": "c4aee292cdeabe03e996eb4396719376c2252602"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/himiklab/yii2-colorbox-widget/zipball/c4aee292cdeabe03e996eb4396719376c2252602",
+                "reference": "c4aee292cdeabe03e996eb4396719376c2252602",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-colorbox": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "himiklab\\colorbox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HimikLab",
+                    "homepage": "https://github.com/himiklab/"
+                }
+            ],
+            "description": "Customizable lightbox widget for Yii2",
+            "keywords": [
+                "colorbox",
+                "lightbox",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-02-02T10:23:58+00:00"
+        },
+        {
+            "name": "himiklab/yii2-easy-thumbnail-image-helper",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/himiklab/yii2-easy-thumbnail-image-helper.git",
+                "reference": "96776b1f6f56b30652d965c80290c566c4e72155"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/himiklab/yii2-easy-thumbnail-image-helper/zipball/96776b1f6f56b30652d965c80290c566c4e72155",
+                "reference": "96776b1f6f56b30652d965c80290c566c4e72155",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.13",
+                "yiisoft/yii2-httpclient": "*",
+                "yiisoft/yii2-imagine": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "himiklab\\thumbnail\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HimikLab",
+                    "homepage": "https://github.com/himiklab/"
+                }
+            ],
+            "description": "Yii2 helper for creating and caching thumbnails on real time",
+            "keywords": [
+                "helper",
+                "image",
+                "thumbnail",
+                "yii2"
+            ],
+            "time": "2018-03-15T15:42:21+00:00"
+        },
+        {
+            "name": "imagine/imagine",
+            "version": "v0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "a9a702a946073cbca166718f1b02a1e72d742daa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/a9a702a946073cbca166718f1b02a1e72d742daa",
+                "reference": "a9a702a946073cbca166718f1b02a1e72d742daa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "^3.3",
+                "symfony/phpunit-bridge": "^3.2"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2017-05-16T10:31:22+00:00"
+        },
+        {
+            "name": "kartik-v/bootstrap-fileinput",
+            "version": "v4.4.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
+                "reference": "b6343494a53733bf827c28869baf4923a65b6711"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/b6343494a53733bf827c28869baf4923a65b6711",
+                "reference": "b6343494a53733bf827c28869baf4923a65b6711",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\plugins\\fileinput\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An enhanced HTML 5 file input for Bootstrap 3.x with features for file preview for many file types, multiple selection, ajax uploads, and more.",
+            "homepage": "https://github.com/kartik-v/bootstrap-fileinput",
+            "keywords": [
+                "ajax",
+                "bootstrap",
+                "delete",
+                "file",
+                "image",
+                "input",
+                "jquery",
+                "multiple",
+                "preview",
+                "progress",
+                "upload"
+            ],
+            "time": "2018-07-25T16:54:29+00:00"
+        },
+        {
             "name": "kartik-v/yii2-krajee-base",
             "version": "v1.8.9",
             "source": {
@@ -376,6 +726,56 @@
                 "yii2"
             ],
             "time": "2017-09-29T06:18:14+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-widget-fileinput",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
+                "reference": "bfed1b4201cc5fb3ac11563e1269f0ca64071e0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/bfed1b4201cc5fb3ac11563e1269f0ca64071e0b",
+                "reference": "bfed1b4201cc5fb3ac11563e1269f0ca64071e0b",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/bootstrap-fileinput": "~4.2",
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\file\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An enhanced FileInput widget for Bootstrap 3.x with file preview, multiple selection, and more features (sub repo split from yii2-widgets)",
+            "homepage": "https://github.com/kartik-v/yii2-widget-fileinput",
+            "keywords": [
+                "extension",
+                "file",
+                "form",
+                "input",
+                "jquery",
+                "plugin",
+                "upload",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-06-26T20:23:24+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -483,6 +883,52 @@
                 "mailer"
             ],
             "time": "2018-07-31T09:26:32+00:00"
+        },
+        {
+            "name": "tinymce/tinymce",
+            "version": "4.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tinymce/tinymce-dist.git",
+                "reference": "66308359bd3ff09996ed0e4121ca777c7f4ab508"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/66308359bd3ff09996ed0e4121ca777c7f4ab508",
+                "reference": "66308359bd3ff09996ed0e4121ca777c7f4ab508",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "tinymce.js",
+                        "plugins/*/plugin.js",
+                        "themes/*/theme.js"
+                    ],
+                    "files": [
+                        "tinymce.min.js",
+                        "plugins/*/plugin.min.js",
+                        "themes/*/theme.min.js",
+                        "skins/**"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-only"
+            ],
+            "description": "Web based JavaScript HTML WYSIWYG editor control.",
+            "homepage": "http://www.tinymce.com",
+            "keywords": [
+                "editor",
+                "html",
+                "javascript",
+                "richtext",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2018-07-26T06:38:42+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -798,6 +1244,100 @@
             "time": "2018-02-13T15:11:30+00:00"
         },
         {
+            "name": "yiisoft/yii2-imagine",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-imagine.git",
+                "reference": "a8a1a068862a86e3395e665bc86e63d5c9b60841"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/a8a1a068862a86e3395e665bc86e63d5c9b60841",
+                "reference": "a8a1a068862a86e3395e665bc86e63d5c9b60841",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "~0.6.0 | ~0.7.1",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\imagine\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com"
+                }
+            ],
+            "description": "The Imagine integration for the Yii framework",
+            "keywords": [
+                "helper",
+                "image",
+                "imagine",
+                "yii2"
+            ],
+            "time": "2018-02-22T11:57:06+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-jui",
+            "version": "2.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-jui.git",
+                "reference": "ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed",
+                "reference": "ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-ui": "~1.12.1",
+                "yiisoft/yii2": "~2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\jui\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                }
+            ],
+            "description": "The Jquery UI extension for the Yii framework",
+            "keywords": [
+                "jQuery UI",
+                "yii2"
+            ],
+            "time": "2017-11-25T15:32:29+00:00"
+        },
+        {
             "name": "yiisoft/yii2-swiftmailer",
             "version": "2.0.7",
             "source": {
@@ -849,57 +1389,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "axelpal/yii2-attachments",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AxelPAL/yii2-attachments.git",
-                "reference": "28cf8ce8c05f6caa5b95e4299af21f8b4a2b3d40"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AxelPAL/yii2-attachments/zipball/28cf8ce8c05f6caa5b95e4299af21f8b4a2b3d40",
-                "reference": "28cf8ce8c05f6caa5b95e4299af21f8b4a2b3d40",
-                "shasum": ""
-            },
-            "require": {
-                "himiklab/yii2-colorbox-widget": "*",
-                "kartik-v/yii2-widget-fileinput": "v1.0.3",
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-jui": "^2.0"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "file\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-4-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Alimzhan Abuov aka Nemmo",
-                    "email": "alimzhan.abu@yandex.kz"
-                },
-                {
-                    "name": "Alexander Palchikov aka AxelPAL",
-                    "email": "axelpal@gmail.com"
-                }
-            ],
-            "description": "Extension for file uploading and attaching to the models",
-            "keywords": [
-                "attachment",
-                "extension",
-                "file",
-                "upload",
-                "yii2"
-            ],
-            "time": "2016-04-12T07:16:51+00:00"
-        },
         {
             "name": "behat/gherkin",
             "version": "v4.5.1",
@@ -958,47 +1447,6 @@
                 "parser"
             ],
             "time": "2017-08-30T11:04:43+00:00"
-        },
-        {
-            "name": "bower-asset/jquery-colorbox",
-            "version": "1.6.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jackmoore/colorbox.git",
-                "reference": "bac78120c6ca9e63370cc317ab6f400129cd6608"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jackmoore/colorbox/zipball/bac78120c6ca9e63370cc317ab6f400129cd6608",
-                "reference": "bac78120c6ca9e63370cc317ab6f400129cd6608",
-                "shasum": null
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.3.2"
-            },
-            "type": "bower-asset"
-        },
-        {
-            "name": "bower-asset/jquery-ui",
-            "version": "1.12.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/components/jqueryui.git",
-                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/components/jqueryui/zipball/44ecf3794cc56b65954cc19737234a3119d036cc",
-                "reference": "44ecf3794cc56b65954cc19737234a3119d036cc",
-                "shasum": null
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.6"
-            },
-            "type": "bower-asset",
-            "license": [
-                "MIT"
-            ]
         },
         {
             "name": "bower-asset/typeahead.js",
@@ -1388,152 +1836,6 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
-        },
-        {
-            "name": "himiklab/yii2-colorbox-widget",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/himiklab/yii2-colorbox-widget.git",
-                "reference": "c4aee292cdeabe03e996eb4396719376c2252602"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/himiklab/yii2-colorbox-widget/zipball/c4aee292cdeabe03e996eb4396719376c2252602",
-                "reference": "c4aee292cdeabe03e996eb4396719376c2252602",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery-colorbox": "*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "himiklab\\colorbox\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "HimikLab",
-                    "homepage": "https://github.com/himiklab/"
-                }
-            ],
-            "description": "Customizable lightbox widget for Yii2",
-            "keywords": [
-                "colorbox",
-                "lightbox",
-                "widget",
-                "yii2"
-            ],
-            "time": "2016-02-02T10:23:58+00:00"
-        },
-        {
-            "name": "kartik-v/bootstrap-fileinput",
-            "version": "v4.4.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "b6343494a53733bf827c28869baf4923a65b6711"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/b6343494a53733bf827c28869baf4923a65b6711",
-                "reference": "b6343494a53733bf827c28869baf4923a65b6711",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.4.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "kartik\\plugins\\fileinput\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "An enhanced HTML 5 file input for Bootstrap 3.x with features for file preview for many file types, multiple selection, ajax uploads, and more.",
-            "homepage": "https://github.com/kartik-v/bootstrap-fileinput",
-            "keywords": [
-                "ajax",
-                "bootstrap",
-                "delete",
-                "file",
-                "image",
-                "input",
-                "jquery",
-                "multiple",
-                "preview",
-                "progress",
-                "upload"
-            ],
-            "time": "2018-07-25T16:54:29+00:00"
-        },
-        {
-            "name": "kartik-v/yii2-widget-fileinput",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
-                "reference": "bfed1b4201cc5fb3ac11563e1269f0ca64071e0b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/bfed1b4201cc5fb3ac11563e1269f0ca64071e0b",
-                "reference": "bfed1b4201cc5fb3ac11563e1269f0ca64071e0b",
-                "shasum": ""
-            },
-            "require": {
-                "kartik-v/bootstrap-fileinput": "~4.2",
-                "kartik-v/yii2-krajee-base": "~1.7"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kartik\\file\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "An enhanced FileInput widget for Bootstrap 3.x with file preview, multiple selection, and more features (sub repo split from yii2-widgets)",
-            "homepage": "https://github.com/kartik-v/yii2-widget-fileinput",
-            "keywords": [
-                "extension",
-                "file",
-                "form",
-                "input",
-                "jquery",
-                "plugin",
-                "upload",
-                "widget",
-                "yii2"
-            ],
-            "time": "2015-06-26T20:23:24+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3600,52 +3902,6 @@
                 "yii2"
             ],
             "time": "2018-05-02T22:05:25+00:00"
-        },
-        {
-            "name": "yiisoft/yii2-jui",
-            "version": "2.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-jui.git",
-                "reference": "ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed",
-                "reference": "ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery-ui": "~1.12.1",
-                "yiisoft/yii2": "~2.0.4"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\jui\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com"
-                }
-            ],
-            "description": "The Jquery UI extension for the Yii framework",
-            "keywords": [
-                "jQuery UI",
-                "yii2"
-            ],
-            "time": "2017-11-25T15:32:29+00:00"
         }
     ],
     "aliases": [],

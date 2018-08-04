@@ -41,8 +41,9 @@ AppAsset::register($this);
         // $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
         
     } else {
-        $menuItems[] = ['label' => 'Topic', 'url' => ['/cms/classroom'], 'visible' => Yii::$app->user->can('Administrator') || Yii::$app->user->can('Teacher')];
         $menuItems[] = ['label' => 'Classroom', 'url' => ['/cms/classroom'], 'visible' => Yii::$app->user->can('Administrator') || Yii::$app->user->can('Teacher')];
+        $menuItems[] = ['label' => 'Topic', 'url' => ['/cms/lesson'], 'visible' => Yii::$app->user->can('Administrator')];
+        $menuItems[] = ['label' => 'Exam', 'url' => ['/cms/lesson'], 'visible' => Yii::$app->user->can('Administrator')];
         $menuItems[] = ['label' => 'User Accounts', 'url' => ['/user/admin'], 'visible' => Yii::$app->user->can('Administrator')];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

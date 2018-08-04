@@ -5,19 +5,18 @@ use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
-
+use himiklab\thumbnail\EasyThumbnailImage;
 use frontend\assets\AppAsset;
 
 frontend\assets\AppAsset::register($this);
-
 /* @var $this yii\web\View */
-/* @var $model common\modules\cms\models\ClassroomCode */
+/* @var $model common\modules\cms\models\Lesson */
 
-$this->title = $model->code;
-$this->params['breadcrumbs'][] = ['label' => 'Classroom Codes', 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Lessons', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="classroom-code-view">
+<div class="lesson-view">
 <?php 
         Modal::begin([
             'header' => '<b>' . Yii::t('app', $this->title) . '</b>',
@@ -30,44 +29,55 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
-
     <p>
-        <?= Html::a('Update Classroom', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete Classroom', ['delete', 'id' => $model->id], [
+        <?= Html::a('Update Lesson', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete Lesson', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::button('Add New Student', ['value'=>Url::to(['/cms/student/create-student', 'id' => $model->id]), 'class' => 'btn btn-success modalButton']); ?>
+        <?= Html::button('Add New Topic', ['value'=>Url::to(['/cms/topic/create-topic', 'id' => $model->id]), 'class' => 'btn btn-success modalButton']); ?>
     </p>
 
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'code',
+            'title',
+            [
+                'attribute' => 'purpose',
+                'format' => 'raw',
+            ],
+        ],
+    ]) ?>
 
-    
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'ln',
-            'fn',
-            'mn',
+            'lessonCategory.title',
+            'title',
+            'passing_grade',
+            // 'instruction:ntext',
 
-            // ['class' => 'yii\grid\ActionColumn'],
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',
                 'buttons'=>[
                     'view' => function ($url, $model) {
-                                return Html::button('view', ['value'=>Url::to(['/cms/student/view', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
+                                return Html::button('view', ['value'=>Url::to(['/cms/topic/view', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
                             },
                     'update' => function ($url, $model) {
-                                return Html::button('edit', ['value'=>Url::to(['/cms/student/update', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
+                                return Html::button('edit', ['value'=>Url::to(['/cms/topic/update', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
                             },
                     'delete' => function ($url, $model) {
-                                return Html::a(Yii::t('yii', 'delete'), Yii::$app->urlManager->createUrl(['/cms/student/delete?id='.$model->id]), ['title' => Yii::t('yii', 'Delete'), 'class' => 'btn btn-danger btn-flat btn-xs ',
+                                return Html::a(Yii::t('yii', 'delete'), Yii::$app->urlManager->createUrl(['/cms/topic/delete?id='.$model->id]), ['title' => Yii::t('yii', 'Delete'), 'class' => 'btn btn-danger btn-flat btn-xs ',
                                         'data' => [
                                         'confirm' => 'Are you sure you want to delete this project?',
                                         'method' => 'post',
@@ -76,6 +86,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]]
             ],
     ]); ?>
-
+    
 
 </div>

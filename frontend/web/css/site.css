@@ -2,7 +2,9 @@ html,
 body {
     height: 100%;
 }
-
+.file-preview-image{
+    max-height: 100%;
+}
 .wrap {
     min-height: 100%;
     height: auto;
