@@ -50,42 +50,65 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'purpose',
                 'format' => 'raw',
             ],
+            [
+                'label' => 'Image',
+                'value' => function($model){
+                    foreach($model->files as $file){
+                        return EasyThumbnailImage::thumbnailImg(
+                            $file->path,
+                            100,
+                            100,
+                            EasyThumbnailImage::THUMBNAIL_OUTBOUND,
+                            ['alt' => $file->name]
+                        );
+                    }
+                },
+                'format' => 'raw'
+            ]
         ],
     ]) ?>
 
+    <div class="row">
+        <div class='col-md-12'>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'lessonCategory.title',
-            'title',
-            'passing_grade',
-            // 'instruction:ntext',
+                    'lessonCategory.title',
+                    'title',
+                    'passing_grade',
+                    // 'instruction:ntext',
 
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete}',
-                'buttons'=>[
-                    'view' => function ($url, $model) {
-                                return Html::button('view', ['value'=>Url::to(['/cms/topic/view', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
-                            },
-                    'update' => function ($url, $model) {
-                                return Html::button('edit', ['value'=>Url::to(['/cms/topic/update', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
-                            },
-                    'delete' => function ($url, $model) {
-                                return Html::a(Yii::t('yii', 'delete'), Yii::$app->urlManager->createUrl(['/cms/topic/delete?id='.$model->id]), ['title' => Yii::t('yii', 'Delete'), 'class' => 'btn btn-danger btn-flat btn-xs ',
-                                        'data' => [
-                                        'confirm' => 'Are you sure you want to delete this project?',
-                                        'method' => 'post',
-                                    ]]);
-                            }
-                    ]]
-            ],
-    ]); ?>
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} {delete} {exam}',
+                        'buttons'=>[
+                            'view' => function ($url, $model) {
+                                        return Html::button('view', ['value'=>Url::to(['/cms/topic/view', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
+                                    },
+                            'update' => function ($url, $model) {
+                                        return Html::button('edit', ['value'=>Url::to(['/cms/topic/update', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
+                                    },
+                            'delete' => function ($url, $model) {
+                                        return Html::a(Yii::t('yii', 'delete'), Yii::$app->urlManager->createUrl(['/cms/topic/delete?id='.$model->id]), ['title' => Yii::t('yii', 'Delete'), 'class' => 'btn btn-danger btn-flat btn-xs ',
+                                                'data' => [
+                                                'confirm' => 'Are you sure you want to delete this project?',
+                                                'method' => 'post',
+                                            ]]);
+                                    },
+                            'exam' => function ($url, $model) {
+                                        return Html::a(empty($model->questions) ? 'create exam' : 'view exam', ['/cms/exam/create-exam', 'id' => $model->id], ['class' => empty($model->questions) ? 'btn btn-warning btn-xs' : 'btn btn-info btn-xs']);
+                                    },
+                            ]
+                    ]],
+            ]); ?>
+        </div>
+    </div>
+    <h1>Mga Talakayin</h1>
+    
     
 
 </div>

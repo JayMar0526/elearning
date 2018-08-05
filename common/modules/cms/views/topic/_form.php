@@ -22,7 +22,7 @@ use common\modules\cms\models\LessonCategory;
             'data' => ArrayHelper::map(LessonCategory::find()->all(), 'id', 'title'),
             'options' => ['placeholder' => '    Nothing Selected   ',
             'multiple' => false,
-            'class'=>'position-select'],
+            'class'=>'category-select'],
             'pluginOptions' => [
                 'allowClear' => true
             ],
@@ -37,22 +37,24 @@ use common\modules\cms\models\LessonCategory;
 
 
     <?php
-    echo '<label>Upload Image (Only jpeg and png format acceptable)</label>';
+    echo '<label>Upload Image (Only jpeg, png and gif format acceptable)</label>';
     echo AttachmentsInput::widget([
             'id' => 'file-input', // Optional
             'model' => $model,
             'options' => [ // Options of the Kartik's FileInput widget
-                'multiple' => true, // If you want to allow multiple upload, default to false
+                'multiple' => false, // If you want to allow multiple upload, default to false
             ],
             'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
                 'maxFileCount' => 1, // Client max files
-                // 'minFileCount' => 3, # Comment for a while, approached by NBOO
+                // 'minFileCount' => 3, # Comment for a while
+                'validateInitialCount' => true,
                 'dropZoneEnabled' => false,
                 'allowedFileExtensions'=> ['jpg', 'png', 'gif'],
                 'showPreview' => true,
                 'browseLabel' => 'Select file',
                 'overwriteInitial' => false,
                 'showUpload' => false,
+                'showRemove' => false,
                 'fileActionSettings' => [
                     'showUpload' => false,
                 ],

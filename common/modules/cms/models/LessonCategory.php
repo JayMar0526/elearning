@@ -38,7 +38,7 @@ class LessonCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => 'Lesson Category',
         ];
     }
 

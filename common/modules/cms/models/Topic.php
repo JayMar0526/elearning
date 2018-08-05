@@ -34,10 +34,9 @@ class Topic extends \yii\db\ActiveRecord
     {
         return [
             [['lesson_id', 'title', 'instruction'], 'required'],
-            [['lesson_id', 'category_id'], 'integer'],
+            [['lesson_id', 'category_id', 'passing_grade'], 'integer'],
             [['instruction'], 'string'],
             [['title'], 'string', 'max' => 255],
-            [['passing_grade'], 'string', 'max' => 45],
             [['lesson_id'], 'exist', 'skipOnError' => true, 'targetClass' => Lesson::className(), 'targetAttribute' => ['lesson_id' => 'id']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => LessonCategory::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
@@ -54,7 +53,7 @@ class Topic extends \yii\db\ActiveRecord
             'lesson_id' => 'Lesson ID',
             'title' => 'Title',
             'passing_grade' => 'Passing Grade',
-            'instruction' => 'Panuto',
+            'instruction' => 'Description/Panuto',
         ];
     }
 

@@ -151,7 +151,9 @@ class TopicController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        // return $this->redirect(['index']);
+        \Yii::$app->getSession()->setFlash('success', 'You have successfully deleted the record.');
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**

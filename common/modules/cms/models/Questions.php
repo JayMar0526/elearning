@@ -34,7 +34,8 @@ class Questions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['topic_id', 'title', 'unit_id'], 'required'],
+            [['topic_id', 'unit_id'], 'required'],
+            [['ans'], 'required', 'on' => 'updateAns'],
             [['topic_id', 'unit_id'], 'integer'],
             [['title', 'ans'], 'string', 'max' => 255],
             [['topic_id'], 'exist', 'skipOnError' => true, 'targetClass' => Topic::className(), 'targetAttribute' => ['topic_id' => 'id']],
@@ -49,10 +50,19 @@ class Questions extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'topic_id' => 'Topic ID',
-            'title' => 'Title',
-            'ans' => 'Ans',
-            'unit_id' => 'Unit ID',
+            'topic_id' => 'Topic',
+            'title' => 'Question',
+            'ans' => 'Answer',
+            'unit_id' => 'Type',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'fileBehavior' => [
+                'class' => \file\behaviors\FileBehavior::className()
+            ]
         ];
     }
 
@@ -62,6 +72,14 @@ class Questions extends \yii\db\ActiveRecord
     public function getQuestionChoices()
     {
         return $this->hasMany(QuestionChoices::className(), ['question_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAnswer()
+    {
+        return $this->hasOne(QuestionChoices::className(), ['id' => 'ans']);
     }
 
     /**

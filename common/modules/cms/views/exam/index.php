@@ -4,20 +4,20 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel common\modules\cms\models\LessonCategorySearch */
+/* @var $searchModel common\modules\cms\modelsQuestionsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Lesson Categories';
+$this->title = 'Questions';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="lesson-category-index">
+<div class="questions-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Lesson Category', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Questions', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,7 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'id',
+            'topic_id',
             'title',
+            'ans',
+            'unit_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -30,7 +30,7 @@ class QuestionChoices extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['question_id', 'choice', 'order'], 'required'],
+            [['question_id', 'choice'], 'required'],
             [['question_id', 'order'], 'integer'],
             [['choice'], 'string', 'max' => 255],
             [['question_id'], 'exist', 'skipOnError' => true, 'targetClass' => Questions::className(), 'targetAttribute' => ['question_id' => 'id']],
