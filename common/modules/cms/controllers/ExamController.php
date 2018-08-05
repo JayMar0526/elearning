@@ -9,7 +9,6 @@ use common\modules\cms\models\Topic;
 use common\modules\cms\models\QuestionsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use common\models\MultipleModel;
 use yii\helpers\ArrayHelper;
 use yii\filters\VerbFilter;

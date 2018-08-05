@@ -10,7 +10,7 @@ return [
     'id' => 'app-frontend',
     'name' => 'E-Learning',
     'basePath' => dirname(__DIR__),
-    'defaultRoute' => '/elearning/default/index',
+    'defaultRoute' => '/site/index',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [

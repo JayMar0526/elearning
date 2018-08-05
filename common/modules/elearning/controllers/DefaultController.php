@@ -45,8 +45,8 @@ class DefaultController extends Controller
                 'rules' => [
                     [
                        
-                        'allow' => Yii::$app->session->get('studId'),
-                        'roles' => ['@'],
+                        'allow' => true,
+                        'roles' => ['Teacher', 'Student', 'Administrator'],
                     ],
                 ],
             ],
@@ -64,9 +64,9 @@ class DefaultController extends Controller
             $query = Student::find()->joinWith('cr')->where(['cr_code.code' => $model->cr_id, 'ln' => $model->ln, 'fn' => $model->fn])->One();
             if($query){
                 Yii::$app->session->set('studId', $query->id);
-                return $this->redirect('elearning/default/home');
+                return $this->redirect(['/elearning/default/home']);
             }else{
-                \Yii::$app->getSession()->setFlash('danger', 'The student is not exist.');
+                \Yii::$app->getSession()->setFlash('danger', 'The student is not exist or incorrect classroom code.');
             }
         }        
         
@@ -81,8 +81,14 @@ class DefaultController extends Controller
      */
     public function actionHome()
     {
-        $lessons = Lesson::find()->all();
         // echo Yii::$app->session->get('studId'); exit;
-        return $this->render('home', ['lessons' => $lessons]);
+        if(empty(Yii::$app->session->get('studId')) && Yii::$app->user->can('Student')){
+            return $this->redirect('index');
+        }else{
+            $lessons = Lesson::find()->all();
+            
+            return $this->render('home', ['lessons' => $lessons]);
+        }
+        
     }
 }

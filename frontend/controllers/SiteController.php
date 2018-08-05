@@ -67,6 +67,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->can('Administrator')){
+            return $this->redirect(['user/admin']);
+        }elseif (Yii::$app->user->can('Teacher')){
+            return $this->redirect(['elearning/default/home']);
+        }elseif (Yii::$app->user->can('Student')) {
+            return $this->redirect(['elearning/default/index']);
+        }
+
         return $this->render('index');
     }
 

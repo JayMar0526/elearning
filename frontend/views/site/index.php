@@ -15,7 +15,7 @@ $this->title = 'E-Learning Class';
     </div>
 
     <div class="body-content jumbotron">
-    		<?= Html::a('I\'m a teacher', ['/user/login'], ['class' => 'btn btn-success']) ?> <?= Html::a('I\'m a student', ['/site/student-login'], ['class' => 'btn btn-success']) ?>
+    		<?= Html::a('Login', ['/user/login'], ['class' => 'btn btn-success']) ?>
     </div>
 
     
