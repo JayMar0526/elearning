@@ -12,6 +12,10 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\MultipleModel;
 use yii\helpers\ArrayHelper;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
+
 
 /**
  * ExamController implements the CRUD actions for Questions model.
@@ -28,6 +32,17 @@ class ExamController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete', 'view-question','question-answer', 'create-exam', 'create-question'],
+                'rules' => [
+                    [
+                       
+                        'allow' => true,
+                        'roles' => ['Administrator'],
+                    ],
                 ],
             ],
         ];

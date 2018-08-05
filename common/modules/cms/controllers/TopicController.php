@@ -8,6 +8,8 @@ use common\modules\cms\models\TopicSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * TopicController implements the CRUD actions for Topic model.
@@ -24,6 +26,17 @@ class TopicController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete', 'create-topic'],
+                'rules' => [
+                    [
+                       
+                        'allow' => true,
+                        'roles' => ['Administrator'],
+                    ],
                 ],
             ],
         ];

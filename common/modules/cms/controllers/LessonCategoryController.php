@@ -8,6 +8,8 @@ use common\modules\cms\models\LessonCategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * LessonCategoryController implements the CRUD actions for LessonCategory model.
@@ -24,6 +26,17 @@ class LessonCategoryController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                       
+                        'allow' => true,
+                        'roles' => ['Administrator'],
+                    ],
                 ],
             ],
         ];

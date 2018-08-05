@@ -33,7 +33,7 @@ class Student extends \yii\db\ActiveRecord
     {
         return [
             [['ln', 'fn', 'cr_id'], 'required'],
-            [['cr_id'], 'integer'],
+            [['cr_id'], 'safe'],
             [['ln', 'fn', 'mn'], 'string', 'max' => 45],
             [['cr_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClassroomCode::className(), 'targetAttribute' => ['cr_id' => 'id']],
         ];

@@ -10,6 +10,8 @@ use common\modules\cms\models\StudentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * ClassroomController implements the CRUD actions for ClassroomCode model.
@@ -28,7 +30,19 @@ class ClassroomController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                       
+                        'allow' => true,
+                        'roles' => ['Teacher', 'Administrator'],
+                    ],
+                ],
+            ],
         ];
+
     }
 
     /**
@@ -132,12 +146,6 @@ class ClassroomController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    public function actionAddStudent()
-    {
-        
-    }
-
 
     
 }

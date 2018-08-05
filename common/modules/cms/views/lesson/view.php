@@ -69,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <div class="row">
+    <h1>Mga Talakayin</h1>
         <div class='col-md-12'>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -107,7 +108,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
         </div>
     </div>
-    <h1>Mga Talakayin</h1>
     
     
 

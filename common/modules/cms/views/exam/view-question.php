@@ -37,10 +37,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Answer',
                 'value' => function($model){
-                    return $model->answer->choice;
+                    $result = '';
+                    if($model->unit_id != 1){
+                        if(!empty($model->ans)){
+                            $result = $model->answer->choice;
+                        }
+                    }else{
+                        $result = $model->ans;
+                    }
+                    return $result;
                 }
             ],
-            'answer.choice',
             'unit.unit',
             [
                 'label' => 'Choices',

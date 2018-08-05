@@ -30,7 +30,7 @@ class Lesson extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'code'], 'required'],
-            [['title', 'code'], 'string', 'max' => 45],
+            [['title', 'code'], 'string', 'max' => 255],
             [['purpose'], 'safe'],
         ];
     }

@@ -8,6 +8,8 @@ use common\modules\cms\models\StudentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * StudentController implements the CRUD actions for Student model.
@@ -24,6 +26,17 @@ class StudentController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete', 'create-student'],
+                'rules' => [
+                    [
+                       
+                        'allow' => true,
+                        'roles' => ['Administrator', 'Teacher'],
+                    ],
                 ],
             ],
         ];

@@ -34,9 +34,6 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'thumbnail' => [
-            'class' => 'himiklab\thumbnail\EasyThumbnail',
-            'cacheAlias' => 'assets/gallery_thumbnails',
-        ],
+        
     ],
 ];

@@ -33,7 +33,7 @@ class Topic extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['lesson_id', 'title', 'instruction'], 'required'],
+            [['lesson_id', 'instruction'], 'required'],
             [['lesson_id', 'category_id', 'passing_grade'], 'integer'],
             [['instruction'], 'string'],
             [['title'], 'string', 'max' => 255],
