@@ -72,7 +72,12 @@ class SiteController extends Controller
         }elseif (Yii::$app->user->can('Teacher')){
             return $this->redirect(['elearning/default/home']);
         }elseif (Yii::$app->user->can('Student')) {
-            return $this->redirect(['elearning/default/index']);
+            if(empty(Yii::$app->session->get('studId')) && Yii::$app->user->can('Student')){
+                return $this->redirect(['/elearning/default/index']);
+            }else{
+                return $this->redirect(['elearning/default/home']);
+            }
+            
         }
 
         return $this->render('index');

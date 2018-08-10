@@ -17,7 +17,9 @@ $this->title = 'E-Learning Class';
     <div class="body-content">
     	<div class="panel panel-default col-md-6 col-md-offset-3">
 			<div class="panel-body">
-
+				<div class="alert alert-success">
+				  <strong>Success!</strong> Please enter the classroom code instructed by the teacher and your lastname and firstname.
+				</div>
 					<?php $form = ActiveForm::begin(); ?>
 
 					    <?= $form->field($model, 'cr_id')->textInput(['maxlength' => true, 'autocomplete' => 'off']) ?>

@@ -28,7 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
         Modal::end();
 ?>
     <h1><?= Html::encode($this->title) ?></h1>
-
+<div class="panel panel-default">
+  <div class="panel-body">
     <p>
         <?= Html::a('Update Lesson', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete Lesson', ['delete', 'id' => $model->id], [
@@ -108,6 +109,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
         </div>
     </div>
+  </div>
+</div>
+    
     
     
 

@@ -76,4 +76,18 @@ class Quiz extends \yii\db\ActiveRecord
     {
         return $this->hasMany(StudAnswers::className(), ['quiz_id' => 'id']);
     }
+
+    public function getQuizLogs($id)
+    {
+        $model = Quiz::findOne(['stud_id' => Yii::$app->session->get('studId'), 'topic_id' => $id]);
+        if(empty($model)) {
+            $model = new Quiz();
+            $model->stud_id = Yii::$app->session->get('studId');
+            $model->topic_id = $id;
+            $model->date_taken = date('Y-m-d');
+            $model->save();
+        }
+
+        return $model;
+    }
 }

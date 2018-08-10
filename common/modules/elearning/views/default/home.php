@@ -13,7 +13,7 @@ $this->title = 'E-Learning Class';
 					<div class="hover01 column">
 		              	<div>
 		              		<figure>
-							    <?= Html::img($lesson->files[0]->url,[]); ?>
+							    <?= Html::a(Html::img($lesson->files[0]->url,[], ['alt'=>'Lesson']), ['view-lesson', 'id' => $lesson->id]); ?>
 							    
 							</figure>
 							<span><?= $lesson->title?></span>

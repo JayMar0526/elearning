@@ -9,8 +9,9 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="classroom-code-form">
-
-    <?php $form = ActiveForm::begin(); ?>
+<div class="panel panel-default">
+  <div class="panel-body">
+  	<?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 
@@ -20,4 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
+  </div>
+</div>
+    
 </div>

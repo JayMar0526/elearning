@@ -64,4 +64,11 @@ class Lesson extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Topic::className(), ['lesson_id' => 'id']);
     }
+
+    public function getCategories($id)
+    {
+        $query = Topic::find()->where(['lesson_id' => $id])->groupBy(['category_id'])->all();
+
+        return  $query;
+    }
 }

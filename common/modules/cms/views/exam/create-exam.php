@@ -29,10 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         echo "<div id='modalContentView'></div>";
         Modal::end();
 ?>
+
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
     <?= $this->render('create-question', ['model' => $model, 'modelsChoices' => $modelsChoices]); ?>
-
+<div class="panel panel-default">
+  <div class="panel-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -92,5 +94,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ],
     ]); ?>
+  </div>
+</div>
+    
     <?php Pjax::end(); ?>
 </div>

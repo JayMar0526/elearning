@@ -11,56 +11,49 @@ use \file\components\AttachmentsInput;
 ?>
 
 <div class="lesson-form">
-
+<div class="panel panel-default">
+  <div class="panel-body">
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'purpose')->textArea(['rows' => 6]) ?>
 
-    <?=	$form->field($model, 'purpose')->label('Layunin')->widget(TinyMce::className(), [
-			'options' => ['rows' => 20],
-			'clientOptions' => [
-				'plugins' => [
-					"advlist autolink lists link charmap print preview anchor",
-					"searchreplace visualblocks code fullscreen",
-					"insertdatetime table contextmenu paste"
-				],
-				'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-			]
-		]);
-	?>
 
-    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 
-    <?php
-    echo '<label>Upload Image (Only jpeg, png and gif format acceptable)</label>';
-    echo AttachmentsInput::widget([
-            'id' => 'file-input', // Optional
-            'model' => $model,
-            'options' => [ // Options of the Kartik's FileInput widget
-                'multiple' => false, // If you want to allow multiple upload, default to false
-            ],
-            'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
-                'maxFileCount' => 1, // Client max files
-                // 'minFileCount' => 3, # Comment for a while
-                'validateInitialCount' => true,
-                'dropZoneEnabled' => false,
-                'allowedFileExtensions'=> ['jpg', 'png', 'gif'],
-                'showPreview' => true,
-                'browseLabel' => 'Select file',
-                'overwriteInitial' => false,
-                'showUpload' => false,
-                'showRemove' => false,
-                'fileActionSettings' => [
-                    'showUpload' => false,
+        <?php
+        echo '<label>Upload Image (Only jpeg, png and gif format acceptable)</label>';
+        echo AttachmentsInput::widget([
+                'id' => 'file-input', // Optional
+                'model' => $model,
+                'options' => [ // Options of the Kartik's FileInput widget
+                    'multiple' => false, // If you want to allow multiple upload, default to false
                 ],
-            ]
-    ]) ?>
+                'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
+                    'maxFileCount' => 1, // Client max files
+                    // 'minFileCount' => 3, # Comment for a while
+                    'validateInitialCount' => true,
+                    'dropZoneEnabled' => false,
+                    'allowedFileExtensions'=> ['jpg', 'png', 'gif'],
+                    'showPreview' => true,
+                    'browseLabel' => 'Select file',
+                    'overwriteInitial' => false,
+                    'showUpload' => false,
+                    'showRemove' => false,
+                    'fileActionSettings' => [
+                        'showUpload' => false,
+                    ],
+                ]
+        ]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+        <div class="form-group">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        </div>
 
-    <?php ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
+  </div>
+</div>
+    
 
 </div>
 <?php
