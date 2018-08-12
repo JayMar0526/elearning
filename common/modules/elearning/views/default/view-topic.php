@@ -62,16 +62,15 @@ $opt = empty($qry) ? false : true ;
         		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices,
         		 						[
                                       'itemOptions' => ['disabled' => $opt],
-			                                'item' => function($index, $label, $name, $checked, $value) {
+			                                // 'item' => function($index, $label, $name, $checked, $value) {
+			                                //     $return = '<label class="modal-radio">';
+			                                //     $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" tabindex="5">';
+			                                //     $return .= '<i></i>';
+			                                //     $return .= '<span>' . $label . '</span>';
+			                                //     $return .= '</label>';
 
-			                                    $return = '<label class="modal-radio">';
-			                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" tabindex="3">';
-			                                    $return .= '<i></i>';
-			                                    $return .= '<span>' . $label . '</span>';
-			                                    $return .= '</label>';
-
-			                                    return $return;
-			                                }
+			                                //     return $return;
+			                                // }
 			                            ])->label(false);
         		 				}
 
@@ -119,7 +118,7 @@ $this->registerJs('
 <style type="text/css">
 img {
 	min-width: 100px;
-	max-width: auto;
+	max-width: 90%;
 	min-height: 100px;
 	max-height: auto;
 
