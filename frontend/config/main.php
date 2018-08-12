@@ -11,7 +11,7 @@ return [
     'name' => 'E-Learning',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => '/site/index',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'thumbnail'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -44,6 +44,10 @@ return [
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+        'thumbnail' => [
+            'class' => 'himiklab\thumbnail\EasyThumbnail',
+            'cacheAlias' => 'assets/gallery_thumbnails',
         ],
         
     ],

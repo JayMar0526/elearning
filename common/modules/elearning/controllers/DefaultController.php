@@ -116,25 +116,33 @@ class DefaultController extends Controller
     public function actionViewTopic($id)
     {
         $modelQuiz = Quiz::getQuizLogs($id);
-        // echo '<pre>'; print_r($modelQuiz); exit;
+
         $model = Topic::find()->where(['id' => $id])->One();
         $categories = Lesson::getCategories($model->lesson_id);
 
         $questions = $model->questions;
+        $datas = [];
 
-        foreach($questions as $question) {
-            $modelExam = new QuizAnswers();
+        if($questions){
+            foreach($questions as $question) {
+                $modelExam = new QuizAnswers();
+                $modelExam->quiz_id = $modelQuiz->id;
+                $modelExam->qtitle = $question->title;
+                $modelExam->question_id = $question->id;
+                $modelExam->qtype = $question->unit_id;
+                $datas[$question->id] = $modelExam;
+            }
         }
-
-
-
         
+
+        // echo '<pre>'; print_r($datas); exit;
 
         return $this->render('view-topic', [
                 'model' => $model,
                 'categories' => $categories,
                 'lesson' => $this->findModel($model->lesson_id),
-                'questions' => $questions
+                'questions' => $questions,
+                'datas' => $datas
                 ]);
     }
 

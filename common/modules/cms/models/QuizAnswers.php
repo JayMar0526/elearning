@@ -17,6 +17,8 @@ use Yii;
  */
 class QuizAnswers extends \yii\db\ActiveRecord
 {
+    public $qtitle;
+    public $qtype;
     /**
      * {@inheritdoc}
      */
@@ -31,7 +33,7 @@ class QuizAnswers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['quiz_id', 'question_id', 'answer'], 'required'],
+            [['quiz_id', 'question_id'], 'required'],
             [['quiz_id', 'question_id'], 'integer'],
             [['answer'], 'string', 'max' => 45],
             [['quiz_id'], 'exist', 'skipOnError' => true, 'targetClass' => Quiz::className(), 'targetAttribute' => ['quiz_id' => 'id']],

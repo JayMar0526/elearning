@@ -42,6 +42,15 @@ class LessonCategory extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            'fileBehavior' => [
+                'class' => \file\behaviors\FileBehavior::className()
+            ]
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

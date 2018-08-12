@@ -45,7 +45,7 @@ use common\modules\cms\models\LessonCategory;
                 'multiple' => false, // If you want to allow multiple upload, default to false
             ],
             'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
-                'maxFileCount' => 1, // Client max files
+                'maxFileCount' => 5, // Client max files
                 // 'minFileCount' => 3, # Comment for a while
                 'validateInitialCount' => true,
                 'dropZoneEnabled' => false,

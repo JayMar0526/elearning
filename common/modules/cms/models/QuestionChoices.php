@@ -57,4 +57,13 @@ class QuestionChoices extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Questions::className(), ['id' => 'question_id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getChoices($id)
+    {
+        $query = QuestionChoices::find()->where(['question_id' => $id])->all();
+        return $query;
+    }
 }

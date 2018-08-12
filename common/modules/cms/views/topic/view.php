@@ -34,15 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Image',
                 'value' => function($model){
+                    $return = '';
                     foreach($model->files as $file){
-                        return EasyThumbnailImage::thumbnailImg(
-                            $file->path,
-                            100,
-                            100,
-                            EasyThumbnailImage::THUMBNAIL_OUTBOUND,
-                            ['alt' => $file->name]
-                        );
+                         $return .= $file->url.'<br>';
                     }
+                    return $return;
                 },
                 'format' => 'raw'
             ]
