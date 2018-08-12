@@ -66,4 +66,15 @@ class QuestionChoices extends \yii\db\ActiveRecord
         $query = QuestionChoices::find()->where(['question_id' => $id])->all();
         return $query;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImage($id)
+    {
+        $query = Questions::find()->where(['id' => $id])->one();
+        return $query;
+    }
+
+
 }
