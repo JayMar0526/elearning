@@ -57,9 +57,9 @@ $opt = empty($qry) ? false : true ;
         		 				}
 
 		        		 		if($data->correct_answer == $data->answer) { 
-		        		 			echo '<span class="text-success pull-right" style="margin:10px 10px 10px 10px;" position:absolute;>&#10004;</span>'; 
+		        		 			echo '<span class="text-success pull-right" style="position: relative; top:-60px;">&#10004;</span>'; 
 		        		 		} else {
-		        		 		 	echo '<span class="text-danger pull-right">&#x2716;</span>'; 
+		        		 		 	echo '<span class="text-danger pull-right" style="position: relative; top:-60px;">&#x2716;</span>'; 
 		        		 		} 
 	        		 		?>
 	        		 		</th>
