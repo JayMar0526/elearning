@@ -27,10 +27,18 @@ $opt = empty($qry) ? false : true ;
 	        	
     		 	</div>
 
+
+        		<?php if($opt == true){ ?>
+	    		 	<div class="col-md-10 col-md-offset-1 alert alert-info" role="alert">
+					  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					  You have already take this quiz.
+					</div>
+				<?php } ?>
+
     			<?= Yii::$app->session->getFlash('msg') ?>
 
         		 	<!--======================================================== Active form ================================================-->
-        		 <?php if($datas) { ?>
+        		<?php if($datas) { ?>
     		 	<div class='col-md-10 col-md-offset-1 bg-info'>
 
         		 	<?php $form = ActiveForm::begin(['id' => 'my-form',]); ?>
@@ -61,7 +69,7 @@ $opt = empty($qry) ? false : true ;
         		 				} else {
         		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices,
         		 						[
-                                      'itemOptions' => ['disabled' => $opt],
+                                      /*'itemOptions' => ['disabled' => $opt],
 			                                'item' => function($index, $label, $name, $checked, $value) {
 
 			                                    $return = '<label class="modal-radio">';
@@ -71,15 +79,17 @@ $opt = empty($qry) ? false : true ;
 			                                    $return .= '</label>';
 
 			                                    return $return;
-			                                }
+			                                }*/
 			                            ])->label(false);
         		 				}
 
-		        		 		if($data->correct_answer == $data->answer) { 
-		        		 			echo '<span class="text-success pull-right" style="position: relative; top:-60px;">&#10004;</span>'; 
-		        		 		} else {
-		        		 		 	echo '<span class="text-danger pull-right" style="position: relative; top:-60px;">&#x2716;</span>'; 
-		        		 		} 
+        		 				if($opt == true){
+			        		 		if($data->correct_answer == $data->answer) { 
+			        		 			echo '<span class="text-success pull-right" style="position: relative; top:-60px;">&#10004;</span>'; 
+			        		 		} else {
+			        		 		 	echo '<span class="text-danger pull-right" style="position: relative; top:-60px;">&#x2716;</span>'; 
+			        		 		} 
+			        		 	}
 	        		 		?>
 	        		 		</th>
 
