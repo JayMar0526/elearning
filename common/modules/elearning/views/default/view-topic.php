@@ -8,12 +8,13 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 
 $this->title = 'E-Learning Class';
+
 ?>
 <?php $this->beginContent('@common/modules/elearning/views/default/_sidebar.php', ['categories' => $categories, 'lesson' => $lesson]) ?>
 <div class="elearning-default-index">
 
     <div class="body-content">
-
+    		
 	        	<div class='col-md-12'>
 	        		<?= empty($model->files[0]->url) ? Html::img($model->lessonCategory->files[0]->url,['width' => '160', 'height' => '130', 'class' => 'pull-right'], ['alt'=>'Lesson']) : Html::img($model->files[0]->url,['width' => '130', 'height' => '130', 'class' => 'pull-right w3-circle'], ['alt'=>'Lesson'])?>
         		 	<div class="w3-panel-12 w3-round-xxlarge w3-teal w3-center-align" style="font-size: 30pt; text-align: center; text-shadow:4px 4px 0 #444; width: 95%; margin-top: 3%; position: initial;">
@@ -26,6 +27,7 @@ $this->title = 'E-Learning Class';
 
 
         		 	<!--======================================================== Active form ================================================-->
+        		 <?php if($datas) { ?>
     		 	<div class='col-md-10 col-md-offset-1 bg-info'>
 
         		 	<?php $form = ActiveForm::begin(['id' => 'my-form',]); ?>
@@ -33,7 +35,7 @@ $this->title = 'E-Learning Class';
         		 	<table class='table table-bordered table-condensed table-hover' style='font-size: 18pt; margin: 0 auto;'>
 
         		 	<?php
-        		 		if($datas) {
+        		 		
 	        		 		foreach($datas as $data) {
 	        		 			$choices = QC::getChoices($data->question_id);
 	        		 			$image = QC::getImage($data->question_id);
@@ -72,7 +74,7 @@ $this->title = 'E-Learning Class';
 	        		 	</tr>
 	        		<?php
 	        		 		} /* End foreach $datas */
-        		 		} /* End if statement of $datas */
+        		 		
         		 	?>
 	        		</table>
 		        	</p>
@@ -82,6 +84,7 @@ $this->title = 'E-Learning Class';
 
 	        		<?php ActiveForm::end(); ?>
 	        	</div>
+	        	<?php } /* End if statement of $datas */ ?>
 
 	        		<!--======================================================== End Active form ================================================-->
 				
