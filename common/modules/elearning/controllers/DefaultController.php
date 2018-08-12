@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use yii\base\Model;
 /**
  * Default controller for the `elearning` module
  */
@@ -123,27 +124,57 @@ class DefaultController extends Controller
         $questions = $model->questions;
         $datas = [];
 
+        $qry = QuizAnswers::find()->where(['quiz_id' => $modelQuiz->id])->exists();
+
         if($questions){
             foreach($questions as $question) {
-                $modelExam = new QuizAnswers();
+                if(!empty($qry)) {
+                    $modelExam = QuizAnswers::find()->where(['quiz_id' => $modelQuiz->id, 'question_id' => $question->id])->One();
+                } else {
+                    $modelExam = new QuizAnswers();
+                }
                 $modelExam->quiz_id = $modelQuiz->id;
                 $modelExam->qtitle = $question->title;
                 $modelExam->question_id = $question->id;
                 $modelExam->qtype = $question->unit_id;
+                $modelExam->correct_answer = $question->ans;
                 $datas[$question->id] = $modelExam;
             }
-        }
-        
+        } 
 
-        // echo '<pre>'; print_r($datas); exit;
+       if (Yii::$app->request->post()) {
 
-        return $this->render('view-topic', [
+            if(Model::loadMultiple($datas, Yii::$app->request->post())) {
+                    $a = 0;
+                   foreach($datas as $d)
+                    {
+                        if($d->correct_answer == $d->answer){
+                            $a++;
+                        }
+                        $d->save(false);
+                        
+                    }
+            }
+
+            Yii::$app->session->setFlash('msg', 
+                '<br>
+                 <div class="col-md-10 col-md-offset-1 alert alert-dismissable" style="background:#84ff86;">
+                 <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                 <i class="glyphicon glyphicon-ok-sign"></i> You have successfully take the quiz. <br> <br> Score '.$a.'/'.count($questions).'</div>');
+
+
+            return $this->redirect(['view-topic', 'id' => $model->id]);
+
+        } else {
+            return $this->render('view-topic', [
                 'model' => $model,
                 'categories' => $categories,
                 'lesson' => $this->findModel($model->lesson_id),
                 'questions' => $questions,
-                'datas' => $datas
+                'datas' => $datas,
+                'qry' => $qry
                 ]);
+        }
     }
 
     protected function findModel($id)
@@ -154,4 +185,12 @@ class DefaultController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
+    public function actionCheckAnswers(){
+
+    }
+
+
+
 }

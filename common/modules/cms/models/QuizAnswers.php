@@ -19,6 +19,8 @@ class QuizAnswers extends \yii\db\ActiveRecord
 {
     public $qtitle;
     public $qtype;
+    public $correct_answer;
+
     /**
      * {@inheritdoc}
      */
@@ -69,4 +71,5 @@ class QuizAnswers extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Questions::className(), ['id' => 'question_id']);
     }
+
 }

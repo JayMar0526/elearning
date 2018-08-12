@@ -8,6 +8,9 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 
 $this->title = 'E-Learning Class';
+
+$opt = empty($qry) ? false : true ;
+
 ?>
 <?php $this->beginContent('@common/modules/elearning/views/default/_sidebar.php', ['categories' => $categories, 'lesson' => $lesson]) ?>
 <div class="elearning-default-index">
@@ -24,6 +27,7 @@ $this->title = 'E-Learning Class';
 	        	
     		 	</div>
 
+    			<?= Yii::$app->session->getFlash('msg') ?>
 
         		 	<!--======================================================== Active form ================================================-->
     		 	<div class='col-md-10 col-md-offset-1 bg-info'>
@@ -40,19 +44,28 @@ $this->title = 'E-Learning Class';
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']quiz_id')->hiddenInput(['value' => $data->quiz_id],['id' => $data->question_id])->label(false)?>
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']question_id')->hiddenInput(['value' => $data->question_id],['id' => $data->question_id])->label(false)?>
 	        		 		<th style="text-align: justify;"><?= $datas[$data->question_id]->qtitle; ?></th>
-
+							<th>
 	        		 		<?php 
 	        		 			$choices = QC::getChoices($data->question_id);
 	        		 			$choices = ArrayHelper::map($choices, 'id', 'choice');
         		 				if($data->qtype == 1){
-        		 					echo '<th>'.$form->field($datas[$data->question_id], '['.$data->question_id.']answer')->textInput()->label(false).'</th>';
+        		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->textInput(['disabled' => $opt])->label(false);
         		 				} elseif ($data->qtype == 2) {
         		 					# code...
         		 				} else {
-        		 					echo '<th>'.$form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices)->label(false).'</th>';
+        		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices, ['itemOptions' => ['disabled' => $opt] ])->label(false);
         		 				}
-		        		 		
+
+		        		 		if($data->correct_answer == $data->answer) { 
+		        		 			echo '<span class="text-success pull-right" style="margin:10px 10px 10px 10px;" position:absolute;>&#10004;</span>'; 
+		        		 		} else {
+		        		 		 	echo '<span class="text-danger pull-right">&#x2716;</span>'; 
+		        		 		} 
 	        		 		?>
+	        		 		</th>
+
+
+
 
 	        		 	</tr>
 	        		<?php
@@ -62,17 +75,17 @@ $this->title = 'E-Learning Class';
 	        		</table>
 		        	</p>
 	        		<div class="form-group text-right">
-				        <?= Html::submitButton('i-submit', ['class' => 'btn btn-lg btn-success']) ?>
+				        <?= empty($qry) ? Html::submitButton('i-submit', ['class' => 'btn btn-lg btn-success']) : "" ; ?>
+				        
 				    </div>
 
 	        		<?php ActiveForm::end(); ?>
+
 	        	</div>
 
 	        		<!--======================================================== End Active form ================================================-->
 				
 	        		<?php // empty($model->lessonCategory->files[0]->url) ? '' : Html::img($model->lessonCategory->files[0]->url,['width' => '20%', 'height' => '100', 'class' => 'pull-left'], ['alt'=>'Lesson'])?>
-        		 	
-				
 
     </div><!-- End of body content -->
 </div> 

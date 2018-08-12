@@ -69,6 +69,12 @@ class Quiz extends \yii\db\ActiveRecord
         return $this->hasOne(Topic::className(), ['id' => 'topic_id']);
     }
 
+
+    public function getQuestions()
+    {
+        return $this->topic->questions;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -90,4 +96,8 @@ class Quiz extends \yii\db\ActiveRecord
 
         return $model;
     }
+
+/*    public function getScore(){
+
+    }*/
 }
