@@ -52,7 +52,19 @@ $this->title = 'E-Learning Class';
         		 				} elseif ($data->qtype == 2) {
         		 					# code...
         		 				} else {
-        		 					echo '<th>'.$form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices)->label(false).'</th>';
+        		 					echo '<th>'.$form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices,
+        		 						[
+			                                'item' => function($index, $label, $name, $checked, $value) {
+
+			                                    $return = '<label class="modal-radio">';
+			                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" tabindex="3">';
+			                                    $return .= '<i></i>';
+			                                    $return .= '<span>' . $label . '</span>';
+			                                    $return .= '</label>';
+
+			                                    return $return;
+			                                }
+			                            ])->label(false).'</th>';
         		 				}
 		        		 		
 	        		 		?>
