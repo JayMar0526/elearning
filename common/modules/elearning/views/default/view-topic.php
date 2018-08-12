@@ -28,24 +28,27 @@ $this->title = 'E-Learning Class';
         		 	<!--======================================================== Active form ================================================-->
     		 	<div class='col-md-10 col-md-offset-1 bg-info'>
 
-        		 	<?php $form = ActiveForm::begin(); ?>
+        		 	<?php $form = ActiveForm::begin(['id' => 'my-form',]); ?>
         		 	<p>
         		 	<table class='table table-bordered table-condensed table-hover' style='font-size: 18pt; margin: 0 auto;'>
 
         		 	<?php
         		 		if($datas) {
 	        		 		foreach($datas as $data) {
+	        		 			$choices = QC::getChoices($data->question_id);
+	        		 			$image = QC::getImage($data->question_id);
+	        		 			
+	        		 			$image = empty($image->files[0]->url) ? '' :  Html::img($image->files[0]->url,[], ['alt'=>'Lesson']);
 	        		?>
 	        		 	<tr>
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']quiz_id')->hiddenInput(['value' => $data->quiz_id],['id' => $data->question_id])->label(false)?>
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']question_id')->hiddenInput(['value' => $data->question_id],['id' => $data->question_id])->label(false)?>
-	        		 		<th style="text-align: justify;"><?= $datas[$data->question_id]->qtitle; ?></th>
+	        		 		<th style="text-align: justify;"><?= $datas[$data->question_id]->qtitle.' '.$image; ?></th>
 
 	        		 		<?php 
-	        		 			$choices = QC::getChoices($data->question_id);
 	        		 			$choices = ArrayHelper::map($choices, 'id', 'choice');
         		 				if($data->qtype == 1){
-        		 					echo '<th>'.$form->field($datas[$data->question_id], '['.$data->question_id.']answer')->textInput()->label(false).'</th>';
+        		 					echo '<th>'.$form->field($datas[$data->question_id], '['.$data->question_id.']answer')->textInput(['class' => 'form-control input-lg'])->label(false).'</th>';
         		 				} elseif ($data->qtype == 2) {
         		 					# code...
         		 				} else {
@@ -83,3 +86,12 @@ $this->registerJs('
 	$("input:radio").addClass("w3-radio");
 ');
 ?>
+<style type="text/css">
+img {
+	min-width: 100px;
+	max-width: auto;
+	min-height: 100px;
+	max-height: auto;
+
+}
+</style>

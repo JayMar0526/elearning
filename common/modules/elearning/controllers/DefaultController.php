@@ -133,7 +133,6 @@ class DefaultController extends Controller
                 $datas[$question->id] = $modelExam;
             }
         }
-        
 
         // echo '<pre>'; print_r($datas); exit;
 
