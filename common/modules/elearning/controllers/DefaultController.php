@@ -162,7 +162,6 @@ class DefaultController extends Controller
                  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                  <i class="glyphicon glyphicon-ok-sign"></i> You have successfully take the quiz. <br> <br> Score '.$a.'/'.count($questions).'</div>');
 
-
             return $this->redirect(['view-topic', 'id' => $model->id]);
 
         } else {
