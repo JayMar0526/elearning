@@ -49,7 +49,7 @@ $opt = empty($qry) ? false : true ;
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']quiz_id')->hiddenInput(['value' => $data->quiz_id],['id' => $data->question_id])->label(false)?>
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']question_id')->hiddenInput(['value' => $data->question_id],['id' => $data->question_id])->label(false)?>
 
-	        		 		<th style="text-align: justify;"><?= $datas[$data->question_id]->qtitle.' '.$image; ?></th>
+	        		 		<th style="text-align: justify"><?= $datas[$data->question_id]->qtitle.' '.$image; ?></th>
 
 							<th>
 	        		 		<?php 
@@ -61,16 +61,18 @@ $opt = empty($qry) ? false : true ;
         		 				} else {
         		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices,
         		 						[
-                                      'itemOptions' => ['disabled' => $opt],
-			                                // 'item' => function($index, $label, $name, $checked, $value) {
-			                                //     $return = '<label class="modal-radio">';
-			                                //     $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" tabindex="5">';
-			                                //     $return .= '<i></i>';
-			                                //     $return .= '<span>' . $label . '</span>';
-			                                //     $return .= '</label>';
-
-			                                //     return $return;
-			                                // }
+	                                     	// 'itemOptions' => ['disabled' => $opt],
+			                                'item' => function($index, $label, $name, $checked, $value) {
+			                                    // $return = '<label class="modal-radio">';
+			                                    // $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" ">';
+			                                    // $return .= '<i></i>';
+			                                    // $return .= '<span>' . $label . '</span>';
+			                                    // $return .= '</label>';
+			                                    $return = '';
+			                                	$return .= Html::radio($name, $checked, ['value' => $value]);
+			                                	$return .= $label; 
+			                                    return  $return;
+			                                }
 			                            ])->label(false);
         		 				}
 
@@ -111,9 +113,13 @@ $opt = empty($qry) ? false : true ;
 <?php $this->endContent() ?>
 <?php
 
-$this->registerJs('
-	$("input:radio").addClass("w3-radio");
-');
+$this->registerJs("
+	$('input:radio').addClass('w3-radio');
+	const check = '{$opt}';
+	if(check){
+		$('input[type=radio]').attr('disabled', true);
+	}
+");
 ?>
 <style type="text/css">
 img {
