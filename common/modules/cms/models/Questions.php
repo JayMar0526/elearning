@@ -82,6 +82,12 @@ class Questions extends \yii\db\ActiveRecord
         return $this->hasOne(QuestionChoices::className(), ['id' => 'ans']);
     }
 
+    public function getAnswerTitle()
+    {
+        return $this->answer ? $this->answer->choice : "" ;
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */

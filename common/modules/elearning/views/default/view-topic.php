@@ -27,10 +27,21 @@ $opt = empty($qry) ? false : true ;
 	        	
     		 	</div>
 
+
+        		<?php if($opt == true){ ?>
+	    		 	<div class="col-md-10 col-md-offset-1 alert alert-info" role="alert">
+					  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					  You have already take this quiz.<br>
+					  <?php if($opt == true) { ?>
+					  	Score: <?= $score; ?> / <?= count($datas); ?>
+					  <?php } ?>
+					</div>
+				<?php } ?>
+
     			<?= Yii::$app->session->getFlash('msg') ?>
 
         		 	<!--======================================================== Active form ================================================-->
-        		 <?php if($datas) { ?>
+        		<?php if($datas) { ?>
     		 	<div class='col-md-10 col-md-offset-1 bg-info'>
 
         		 	<?php $form = ActiveForm::begin(['id' => 'my-form',]); ?>
@@ -49,38 +60,56 @@ $opt = empty($qry) ? false : true ;
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']quiz_id')->hiddenInput(['value' => $data->quiz_id],['id' => $data->question_id])->label(false)?>
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']question_id')->hiddenInput(['value' => $data->question_id],['id' => $data->question_id])->label(false)?>
 
-	        		 		<th style="text-align: justify;"><?= $datas[$data->question_id]->qtitle.' '.$image; ?></th>
+	        		 		<th style="text-align: justify"><?= $datas[$data->question_id]->qtitle.' '.$image; ?></th>
 
 							<th>
 	        		 		<?php 
 	        		 			$choices = ArrayHelper::map($choices, 'id', 'choice');
+
         		 				if($data->qtype == 1){
         		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->textInput(['disabled' => $opt, 'class' => 'form-control input-lg'])->label(false);
         		 				} elseif ($data->qtype == 2) {
-        		 					# code...
+        		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->widget(Select2::classname(), [
+							            'data' => $choices,
+							            'options' => ['placeholder' => '    Nothing Selected   ',
+							            'multiple' => false,
+							            'class'=>'category-select'],
+							            'pluginOptions' => [
+							                'allowClear' => true
+							            ],
+							        ])->label(false);
         		 				} else {
         		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices,
         		 						[
-                                      'itemOptions' => ['disabled' => $opt],
+	                                     	// 'itemOptions' => ['disabled' => $opt],
 			                                'item' => function($index, $label, $name, $checked, $value) {
-
-			                                    $return = '<label class="modal-radio">';
-			                                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" tabindex="3">';
-			                                    $return .= '<i></i>';
-			                                    $return .= '<span>' . $label . '</span>';
-			                                    $return .= '</label>';
-
-			                                    return $return;
+			                                    // $return = '<label class="modal-radio">';
+			                                    // $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" ">';
+			                                    // $return .= '<i></i>';
+			                                    // $return .= '<span>' . $label . '</span>';
+			                                    // $return .= '</label>';
+			                                    $return = '';
+			                                	$return .= Html::radio($name, $checked, ['value' => $value]);
+			                                	$return .= $label; 
+			                                    return  $return;
 			                                }
 			                            ])->label(false);
         		 				}
 
-		        		 		if($data->correct_answer == $data->answer) { 
-		        		 			echo '<span class="text-success pull-right" style="margin:10px 10px 10px 10px;" position:absolute;>&#10004;</span>'; 
-		        		 		} else {
-		        		 		 	echo '<span class="text-danger pull-right">&#x2716;</span>'; 
-		        		 		} 
+        		 				
 	        		 		?>
+	        		 		</th>
+	        		 		<th>
+	        		 			<?php
+	        		 				if($opt == true){
+				        		 		if($data->correct_answer == $data->answer) { 
+				        		 			echo '<span class="text-success pull-right">&#10004;</span>'; 
+				        		 		} else {
+				        		 		 	echo '<span class="text-danger pull-right">&#x2716;</span>
+				        		 		 			<small class="label label-info"> Correct Answer: '.$data->answerTitle.'</small>'; 
+				        		 		} 
+				        		 	}
+	        		 			?>
 	        		 		</th>
 
 
@@ -112,14 +141,18 @@ $opt = empty($qry) ? false : true ;
 <?php $this->endContent() ?>
 <?php
 
-$this->registerJs('
-	$("input:radio").addClass("w3-radio");
-');
+$this->registerJs("
+	$('input:radio').addClass('w3-radio');
+	const check = '{$opt}';
+	if(check){
+		$('input[type=radio]').attr('disabled', true);
+	}
+");
 ?>
 <style type="text/css">
 img {
 	min-width: 100px;
-	max-width: auto;
+	max-width: 90%;
 	min-height: 100px;
 	max-height: auto;
 
