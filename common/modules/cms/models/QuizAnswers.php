@@ -20,6 +20,7 @@ class QuizAnswers extends \yii\db\ActiveRecord
     public $qtitle;
     public $qtype;
     public $correct_answer;
+    public $answerTitle;
 
     /**
      * {@inheritdoc}

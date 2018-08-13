@@ -123,6 +123,7 @@ class DefaultController extends Controller
 
         $questions = $model->questions;
         $datas = [];
+        $score = 0;
 
         $qry = QuizAnswers::find()->where(['quiz_id' => $modelQuiz->id])->exists();
 
@@ -130,6 +131,11 @@ class DefaultController extends Controller
             foreach($questions as $question) {
                 if(!empty($qry)) {
                     $modelExam = QuizAnswers::find()->where(['quiz_id' => $modelQuiz->id, 'question_id' => $question->id])->One();
+
+                    if($question->ans == $modelExam->answer){
+                        $score++;
+                    }
+
                 } else {
                     $modelExam = new QuizAnswers();
                 }
@@ -138,6 +144,7 @@ class DefaultController extends Controller
                 $modelExam->question_id = $question->id;
                 $modelExam->qtype = $question->unit_id;
                 $modelExam->correct_answer = $question->ans;
+                $modelExam->answerTitle = $question->answerTitle;
                 $datas[$question->id] = $modelExam;
             }
         } 
@@ -167,7 +174,8 @@ class DefaultController extends Controller
                 'lesson' => $this->findModel($model->lesson_id),
                 'questions' => $questions,
                 'datas' => $datas,
-                'qry' => $qry
+                'qry' => $qry,
+                'score' => $score,
                 ]);
         }
     }
@@ -180,12 +188,5 @@ class DefaultController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-
-    public function actionCheckAnswers(){
-
-    }
-
-
 
 }
