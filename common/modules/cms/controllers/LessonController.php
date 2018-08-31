@@ -86,6 +86,11 @@ class LessonController extends Controller
     {
         $model = new Lesson();
 
+        $model->purpose = '<div style=" width:auto; padding: 5px; border: 1px solid red; background-color:#ffd76b; text-align: center; font-size: 28pt; font-style:bold;">
+
+                            </div> 
+                            <h3></h3>';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -105,6 +110,9 @@ class LessonController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->purpose = empty($model->purpose) ? '<div style=" width:auto; padding: 5px; border: 1px solid red; background-color:#ffd76b; text-align: center; font-size: 28pt; font-style:bold;"></div> 
+
+<h3></h3>' : $model->purpose;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

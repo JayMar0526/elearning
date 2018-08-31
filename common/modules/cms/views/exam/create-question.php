@@ -41,7 +41,7 @@ $this->registerJs($js);
 
 	    <?php //$form->field($model, 'topic_id')->textInput() ?>
 
-	    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+	    <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'autocomplete' => 'off']) ?>
 
 	    <?php
 	    echo '<label>Image Question (Only jpeg, png and gif format acceptable)</label>';

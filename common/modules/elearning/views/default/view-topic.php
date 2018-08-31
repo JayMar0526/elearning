@@ -67,7 +67,7 @@ $opt = empty($qry) ? false : true ;
 	        		 			$choices = ArrayHelper::map($choices, 'id', 'choice');
 
         		 				if($data->qtype == 1){
-        		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->textInput(['disabled' => $opt, 'class' => 'form-control input-lg'])->label(false);
+        		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->textInput(['disabled' => $opt, 'autocomplete' => 'off', 'class' => 'form-control input-lg'])->label(false);
         		 				} elseif ($data->qtype == 2) {
         		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->widget(Select2::classname(), [
 							            'data' => $choices,
@@ -102,11 +102,11 @@ $opt = empty($qry) ? false : true ;
 	        		 		<th>
 	        		 			<?php
 	        		 				if($opt == true){
-				        		 		if($data->correct_answer == $data->answer) { 
-				        		 			echo '<span class="text-success pull-right">&#10004;</span>'; 
+				        		 		if(strcasecmp($data->correct_answer, $data->answer) == 0) { 
+				        		 			echo '<span class="text-success pull-right">&#10004;</span>';
 				        		 		} else {
 				        		 		 	echo '<span class="text-danger pull-right">&#x2716;</span>
-				        		 		 			<small class="label label-info"> Correct Answer: '.$data->answerTitle.'</small>'; 
+				        		 		 			<small class="label label-info"> Correct Answer: '.$data->correct_answer.'</small>'; 
 				        		 		} 
 				        		 	}
 	        		 			?>
@@ -152,7 +152,7 @@ $this->registerJs("
 <style type="text/css">
 img {
 	min-width: 100px;
-	max-width: 90%;
+	max-width: 70%;
 	min-height: 100px;
 	max-height: auto;
 

@@ -78,7 +78,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    'lessonCategory.title',
+                    [
+                        'label' => 'Lesson Category',
+                        'value' => function($model){
+                            return $model->lessonCategory->title;
+                        },
+                        'format' => 'raw'
+                    ],
                     'title',
                     'passing_grade',
                     // 'instruction:ntext',

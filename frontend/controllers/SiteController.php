@@ -68,8 +68,10 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if(Yii::$app->user->can('Administrator')){
+            Yii::$app->session->set('studId', Yii::$app->user->identity->id);
             return $this->redirect(['user/admin']);
         }elseif (Yii::$app->user->can('Teacher')){
+            Yii::$app->session->set('studId', Yii::$app->user->identity->id);
             return $this->redirect(['elearning/default/home']);
         }elseif (Yii::$app->user->can('Student')) {
             if(empty(Yii::$app->session->get('studId')) && Yii::$app->user->can('Student')){

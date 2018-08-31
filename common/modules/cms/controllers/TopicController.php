@@ -85,6 +85,11 @@ class TopicController extends Controller
     {
         $model = new Topic();
         $lessonId = Yii::$app->request->queryParams['id'];
+        $model->instruction = '<span style="font-size: 30pt;" class="label label-info"></span>
+<h2>Panuto: </h2>
+//For container
+<div class="container bg-info lead"></div>
+<center></center>';
         if ($model->load(Yii::$app->request->post())) {
 
             $model->lesson_id = $lessonId;

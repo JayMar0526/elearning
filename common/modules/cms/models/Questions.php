@@ -37,7 +37,8 @@ class Questions extends \yii\db\ActiveRecord
             [['topic_id', 'unit_id'], 'required'],
             [['ans'], 'required', 'on' => 'updateAns'],
             [['topic_id', 'unit_id'], 'integer'],
-            [['title', 'ans'], 'string', 'max' => 255],
+            [['ans'], 'string', 'max' => 255],
+            [['title'], 'safe'],
             [['topic_id'], 'exist', 'skipOnError' => true, 'targetClass' => Topic::className(), 'targetAttribute' => ['topic_id' => 'id']],
             [['unit_id'], 'exist', 'skipOnError' => true, 'targetClass' => Unit::className(), 'targetAttribute' => ['unit_id' => 'id']],
         ];

@@ -67,7 +67,7 @@ class Lesson extends \yii\db\ActiveRecord
 
     public function getCategories($id)
     {
-        $query = Topic::find()->where(['lesson_id' => $id])->groupBy(['category_id'])->all();
+        $query = Topic::find()->where(['lesson_id' => $id])->groupBy(['category_id'])->orderBy(['id'=>SORT_ASC])->all();
 
         return  $query;
     }

@@ -35,12 +35,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('create-question', ['model' => $model, 'modelsChoices' => $modelsChoices]); ?>
 <div class="panel panel-default">
   <div class="panel-body">
+    <div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'title',
+            [
+                'label' => 'Image Question',
+                'value' => function($model){
+                    return ($model->files) ? HtmL::img($model->files[0]->url) : 'no image';
+                },
+                'format' => 'raw'
+            ],
             'unit.unit',
             [
                 'label' => 'Choices',
@@ -56,6 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'raw'
             ],
+
             [
                 'label' => 'Answer',
                 'value' => function($model){
@@ -94,6 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ],
     ]); ?>
+</div>
   </div>
 </div>
     

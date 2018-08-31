@@ -49,7 +49,7 @@ h2 span {
 }
 .column div span {
 	position: absolute;
-	bottom: -75px; /*-20px*/
+	bottom: -85px; /*-20px*/
 	left: 0;
 	z-index: -1;
 	display: block;
@@ -73,7 +73,7 @@ figure {
 	overflow: hidden;
 }
 figure:hover+span {
-	bottom: -75px; /*-56px*/
+	bottom: -85px; /*-56px*/
 	opacity: 1;
 }
 

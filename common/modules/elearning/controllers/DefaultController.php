@@ -46,7 +46,7 @@ class DefaultController extends Controller
             ],
             [
                 'class' => AccessControl::className(),
-                'only' => ['home'],
+                'only' => ['home', 'view-lesson', 'view-topic'],
                 'rules' => [
                     [
                        
@@ -132,7 +132,7 @@ class DefaultController extends Controller
                 if(!empty($qry)) {
                     $modelExam = QuizAnswers::find()->where(['quiz_id' => $modelQuiz->id, 'question_id' => $question->id])->One();
 
-                    if($question->ans == $modelExam->answer){
+                    if(strcasecmp($question->ans, $modelExam->answer) == 0){
                         $score++;
                     }
 
@@ -155,7 +155,7 @@ class DefaultController extends Controller
                     $score = 0;
                    foreach($datas as $d)
                     {
-                        if($d->correct_answer == $d->answer){
+                        if(strcasecmp($d->correct_answer, $d->answer) == 0){
                             $score++;
                         }
                         $d->save(false);
