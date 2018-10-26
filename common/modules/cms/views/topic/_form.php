@@ -6,6 +6,7 @@ use \file\components\AttachmentsInput;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use common\modules\cms\models\LessonCategory;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model common\modules\cms\models\Topic */
@@ -18,13 +19,16 @@ use common\modules\cms\models\LessonCategory;
 
     <?php //$form->field($model, 'lesson_id')->textInput() ?>
 
-    <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
+    <?php
+    $escape = new JsExpression("function(m) { return m; }");
+    echo $form->field($model, 'category_id')->widget(Select2::classname(), [
             'data' => ArrayHelper::map(LessonCategory::find()->all(), 'id', 'title'),
             'options' => ['placeholder' => '    Nothing Selected   ',
             'multiple' => false,
             'class'=>'category-select'],
             'pluginOptions' => [
-                'allowClear' => true
+                'allowClear' => true,
+                'escapeMarkup' => $escape
             ],
         ])->label('Kategorya');
     ?>
@@ -35,6 +39,17 @@ use common\modules\cms\models\LessonCategory;
 
     <?= $form->field($model, 'instruction')->textarea(['rows' => 6]) ?>
 
+    <?=  $form->field($model, 'sort')->widget(Select2::classname(), [
+            'data' => ['0' => 'Paunang Pagsusulit', '1' => 'Topic', '2' => 'Pahuling pagsusulit'],
+            'options' => ['placeholder' => '    Nothing Selected   ',
+            'multiple' => false,
+            'class'=>'order-select'],
+            'pluginOptions' => [
+                'allowClear' => true,
+                'escapeMarkup' => $escape
+            ],
+        ])
+    ?>
 
     <?php
     echo '<label>Upload Image (Only jpeg, png and gif format acceptable)</label>';

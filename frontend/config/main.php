@@ -8,7 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
-    'name' => 'E-Learning',
+    'name' => 'Interactive Learning Materials',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => '/site/index',
     'bootstrap' => ['log', 'thumbnail'],

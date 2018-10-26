@@ -2,12 +2,12 @@
 use yii\helpers\Html;
 /* @var $this yii\web\View */
 
-$this->title = 'E-Learning Class';
+$this->title = Yii::$app->name;
 ?>
 <div class="site-index">
 
 	<div class="jumbotron">
-        <h1>Welcome to E-Learning Class!</h1>
+        <h1>Welcome to <?= $this->title ?></h1>
 
         <p class="lead">Build your knowledge for the success of your future.</p>
 

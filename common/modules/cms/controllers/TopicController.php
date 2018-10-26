@@ -85,16 +85,21 @@ class TopicController extends Controller
     {
         $model = new Topic();
         $lessonId = Yii::$app->request->queryParams['id'];
-        $model->instruction = '<span style="font-size: 30pt;" class="label label-info"></span>
+        $model->instruction = '<span style="font-size: 30pt;" class="label label-info">Talaan ng Ispisipikasyon</span>
+
+<center><img class="file-preview-image" src=" "></center>
+<h2>Panuto: Basahin at unawain. I-click ang letra ng tamang sagot. </h2>
+';/*'<span style="font-size: 30pt;" class="label label-info"></span>
 <h2>Panuto: </h2>
 //For container
-<div class="container bg-info lead"></div>
-<center></center>';
+<div class="col-md-12 bg-info lead"></div>
+<center></center>';*/
         if ($model->load(Yii::$app->request->post())) {
 
             $model->lesson_id = $lessonId;
 
             if($model->save()){
+
                 \Yii::$app->getSession()->setFlash('success', 'New topic successfully save.');
             }else{
                 \Yii::$app->getSession()->setFlash('warning', 'New student failed to save.');
@@ -143,6 +148,14 @@ class TopicController extends Controller
     {
         $model = $this->findModel($id);
 
+        $filePath = '';
+        if($model) {
+            $data = !empty($model->files[0]) ? $model->files[0]->url : 'walang nakitang image' ;
+            $filePath = 'Pakilagay sa pagitan ng quotation ng <b>src=""</b> itong link --> '.$data;
+        }
+
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->getSession()->setFlash('success', 'You have successfully updated the record.');
             return $this->redirect(Yii::$app->request->referrer);
@@ -150,10 +163,12 @@ class TopicController extends Controller
         if(Yii::$app->request->isAjax){
             return $this->renderAjax('update', [
                 'model' => $model,
+                'filePath' => $filePath
             ]);
         }else{
             return $this->render('update', [
                 'model' => $model,
+                'filePath' => $filePath
             ]);
         }
     }

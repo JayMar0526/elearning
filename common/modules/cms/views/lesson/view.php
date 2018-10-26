@@ -27,8 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
         echo "<div id='modalContentView'></div>";
         Modal::end();
 ?>
-    <h1><?= Html::encode($this->title) ?></h1>
+    
 <div class="panel panel-default">
+  <h1><?= Html::encode($this->title) ?></h1>
   <div class="panel-body">
     <p>
         <?= Html::a('Update Lesson', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -72,6 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
     <h1>Mga Talakayin</h1>
         <div class='col-md-12'>
+            <div class="table-responsive">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
@@ -113,6 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]
                     ]],
             ]); ?>
+            </div>
         </div>
     </div>
   </div>

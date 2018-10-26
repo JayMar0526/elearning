@@ -34,7 +34,7 @@ class Topic extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['lesson_id', 'instruction'], 'required'],
+            [['lesson_id', 'category_id', 'title', 'instruction', 'sort'], 'required'],
             [['lesson_id', 'category_id', 'passing_grade'], 'integer'],
             [['instruction'], 'string'],
             [['title'], 'string', 'max' => 255],
@@ -55,6 +55,7 @@ class Topic extends \yii\db\ActiveRecord
             'title' => 'Title',
             'passing_grade' => 'Passing Grade',
             'instruction' => 'Description/Panuto',
+            'sort' => 'Order'
         ];
     }
 

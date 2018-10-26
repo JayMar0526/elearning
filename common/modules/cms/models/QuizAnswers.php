@@ -3,7 +3,7 @@
 namespace common\modules\cms\models;
 
 use Yii;
-
+use common\modules\cms\models\QuestionChoices;
 /**
  * This is the model class for table "stud_answers".
  *
@@ -71,6 +71,14 @@ class QuizAnswers extends \yii\db\ActiveRecord
     public function getQuestion()
     {
         return $this->hasOne(Questions::className(), ['id' => 'question_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getQAnswer()
+    {
+        return $this->hasOne(QuestionChoices::className(), ['id' => 'correct_answer']);
     }
 
 }

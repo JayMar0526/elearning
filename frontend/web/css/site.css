@@ -7,6 +7,12 @@ body {
     background-size: 300px 100px ;*/
     /**/
 }
+
+/*@media (min-width: 992px) {
+    .modal-lg {
+        width: 1400px;
+    }
+}*/
 .guest {
     background: url('../image/bg.png') no-repeat center center;
     -webkit-background-size: cover;

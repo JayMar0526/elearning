@@ -49,7 +49,6 @@ class DefaultController extends Controller
                 'only' => ['home', 'view-lesson', 'view-topic'],
                 'rules' => [
                     [
-                       
                         'allow' => true,
                         'roles' => ['Teacher', 'Student', 'Administrator'],
                     ],
@@ -64,6 +63,11 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+
+        if(!empty(Yii::$app->session->get('studId'))){
+            return $this->redirect(['/elearning/default/home']);
+        }
+
         $model = new Student();
         if ($model->load(Yii::$app->request->post())) {
             $query = Student::find()->joinWith('cr')->where(['cr_code.code' => $model->cr_id, 'ln' => $model->ln, 'fn' => $model->fn])->One();
@@ -116,10 +120,25 @@ class DefaultController extends Controller
      */
     public function actionViewTopic($id)
     {
-        $modelQuiz = Quiz::getQuizLogs($id);
-
         $model = Topic::find()->where(['id' => $id])->One();
         $categories = Lesson::getCategories($model->lesson_id);
+
+        if(Yii::$app->session->get('studId')){
+            $modelQuiz = Quiz::find()->where(['topic_id' => $id, 'stud_id' => Yii::$app->session->get('studId')])->all();
+            
+            if(empty($modelQuiz) && ($model->sort == 2)){
+                Yii::$app->session->setFlash('danger','Sorry, You are not allowed to perform this action. You have to input the code by clicking the "Panghuling Pagsusulit" in side bar. Thank you ');
+                return $this->redirect(['/elearning/default/view-lesson', 'id' => $model->lesson_id]);
+            }
+        }else {
+            return $this->redirect(['/elearning/default/index']);
+        }
+        
+
+        //Get the value if exist or not since the function post exam has been generated the value for quiz/topic;
+        $modelQuiz = Quiz::getQuizLogs($id);
+
+        
 
         $questions = $model->questions;
         $datas = [];
@@ -187,6 +206,35 @@ class DefaultController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Renders the index view for the module
+     * @return string
+     */
+    public function actionPostExam($id)
+    {
+        $modelTopic = Topic::find()->where(['id' => $id])->One();
+
+        if (Yii::$app->request->post()) {
+
+            $modelPost = Yii::$app->request->post();
+            if($modelPost['code'] == $modelTopic->lesson->code){
+
+                //Asign value;
+                $modelQuiz = Quiz::getQuizLogs($id);
+
+                //return to view topic
+                Yii::$app->runAction('/elearning/default/view-topic', ['id' => $id]);
+            }else {
+                Yii::$app->session->setFlash('warning','Sorry, the code you entered is incorrect');
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
+
+        //return to post exam
+        return $this->renderAjax('post-exam', ['id' => $id]);
+        
     }
 
 }

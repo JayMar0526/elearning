@@ -11,9 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Topics', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="topic-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p class="<?= Yii::$app->request->isAjax ? "hidden" : "" ?>">
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -24,25 +21,33 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+    <div class='table-responsive'>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'title',
             'passing_grade',
-            'instruction:ntext',
             [
-                'label' => 'Image',
+                'label' => 'Panuto',
+                'value' => function($model){
+                    return nl2br($model->instruction);
+                },
+                'format' => 'raw'
+            ],
+            [
+                'label' => 'Images Uploaded',
                 'value' => function($model){
                     $return = '';
                     foreach($model->files as $file){
-                         $return .= $file->url.'<br>';
+                         $return .= '<image src='.$file->url.' style="min-width: 100px; max-width:400px; min-height:50px; max-height:100px;">';
                     }
                     return $return;
                 },
                 'format' => 'raw'
-            ]
+            ],
         ],
     ]) ?>
+
+    </div>
 
 </div>

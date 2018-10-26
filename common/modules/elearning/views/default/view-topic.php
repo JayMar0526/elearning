@@ -18,7 +18,8 @@ $opt = empty($qry) ? false : true ;
     <div class="body-content">
     		
 	        	<div class='col-md-12'>
-	        		<?= empty($model->files[0]->url) ? Html::img($model->lessonCategory->files[0]->url,['width' => '160', 'height' => '130', 'class' => 'pull-right'], ['alt'=>'Lesson']) : Html::img($model->files[0]->url,['width' => '130', 'height' => '130', 'class' => 'pull-right w3-circle'], ['alt'=>'Lesson'])?>
+	        		<?= /*empty($model->files[0]->url) ?*/ Html::img($model->lessonCategory->files[0]->url,['width' => '160', 'height' => '130', 'class' => 'pull-right'], ['alt'=>'Lesson']) /* : Html::img($model->files[0]->url,['width' => '130', 'height' => '130', 'class' => 'pull-right w3-circle'], ['alt'=>'Lesson'])*/ ?>
+
         		 	<div class="w3-panel-12 w3-round-xxlarge w3-teal w3-center-align" style="font-size: 30pt; text-align: center; text-shadow:4px 4px 0 #444; width: 95%; margin-top: 3%; position: initial;">
         		 		<?= $model->title ?>
         		 	</div>
@@ -46,7 +47,7 @@ $opt = empty($qry) ? false : true ;
 
         		 	<?php $form = ActiveForm::begin(['id' => 'my-form',]); ?>
         		 	<p>
-        		 	<table class='table table-bordered table-condensed table-hover' style='font-size: 18pt; margin: 0 auto;'>
+        		 	<table class='table table-bordered table-condensed table-hover' style='font-size: 16pt; '>
 
         		 	<?php
         		 		
@@ -60,9 +61,9 @@ $opt = empty($qry) ? false : true ;
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']quiz_id')->hiddenInput(['value' => $data->quiz_id],['id' => $data->question_id])->label(false)?>
 	        		 		<?= $form->field($datas[$data->question_id], '['.$data->question_id.']question_id')->hiddenInput(['value' => $data->question_id],['id' => $data->question_id])->label(false)?>
 
-	        		 		<th style="text-align: justify"><?= $datas[$data->question_id]->qtitle.' '.$image; ?></th>
+	        		 		<td><?= $datas[$data->question_id]->qtitle.' '.$image; ?></td>
 
-							<th>
+							<td style="max-width:1000px; min-width: auto;">
 	        		 		<?php 
 	        		 			$choices = ArrayHelper::map($choices, 'id', 'choice');
 
@@ -79,7 +80,7 @@ $opt = empty($qry) ? false : true ;
 							            ],
 							        ])->label(false);
         		 				} else {
-        		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices,
+        		 					echo $form->field($datas[$data->question_id], '['.$data->question_id.']answer')->radioList($choices/*,
         		 						[
 	                                     	// 'itemOptions' => ['disabled' => $opt],
 			                                'item' => function($index, $label, $name, $checked, $value) {
@@ -93,24 +94,30 @@ $opt = empty($qry) ? false : true ;
 			                                	$return .= $label; 
 			                                    return  $return;
 			                                }
-			                            ])->label(false);
+			                            ]*/)->label(false);
         		 				}
 
         		 				
 	        		 		?>
-	        		 		</th>
-	        		 		<th>
+	        		 		</td>
+	        		 		<td style="font-size: 12pt;" class="<?= ($opt == true) ? '' : 'hidden' ?>">
 	        		 			<?php
 	        		 				if($opt == true){
 				        		 		if(strcasecmp($data->correct_answer, $data->answer) == 0) { 
 				        		 			echo '<span class="text-success pull-right">&#10004;</span>';
 				        		 		} else {
+				        		 			if($data->qtype == 1){
+				        		 				$label = $data->correct_answer;
+				        		 			} else {
+				        		 				$label = $data->qAnswer->choice;
+				        		 			}
+
 				        		 		 	echo '<span class="text-danger pull-right">&#x2716;</span>
-				        		 		 			<small class="label label-info"> Correct Answer: '.$data->correct_answer.'</small>'; 
-				        		 		} 
+				        		 		 			Correct Answer: '.$label; 
+				        		 		}
 				        		 	}
 	        		 			?>
-	        		 		</th>
+	        		 		</td>
 
 
 
