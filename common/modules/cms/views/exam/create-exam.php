@@ -82,11 +82,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{answer} {view} {delete}',
+                'template' => '{answer} {view} {update} {delete}',
                 'buttons'=>[
                     'view' => function ($url, $model) {
                                 return Html::button('view', ['value'=>Url::to(['/cms/exam/view-question', 'id' => $model->id]), 'class' => 'btn btn-xs btn-primary btn-flat modalButton']);
                             },
+
+                    'update' => function ($url, $model) {
+                                return Html::a(Yii::t('yii', 'update'), Yii::$app->urlManager->createUrl(['/cms/exam/update-exam?id='.$model->id]), ['title' => Yii::t('yii', 'update'), 'class' => 'btn btn-primary btn-flat btn-xs ']);
+                            },
+
                     'delete' => function ($url, $model) {
                                 return Html::a(Yii::t('yii', 'delete'), Yii::$app->urlManager->createUrl(['/cms/exam/delete?id='.$model->id]), ['title' => Yii::t('yii', 'Delete'), 'class' => 'btn btn-danger btn-flat btn-xs ',
                                         'data' => [

@@ -95,6 +95,7 @@ $this->registerJs($js);
 	        'model' => $modelsChoices[0],
 	        'formId' => 'dynamic-form',
 	        'formFields' => [
+	        	'id',
 	            'choice',
 	        ],
 	    ]); ?>
@@ -132,7 +133,7 @@ $this->registerJs($js);
 	    <?php DynamicFormWidget::end(); ?>
 
 	    <div class="form-group">
-	        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+	        <?= Html::submitButton(($model->isNewRecord) ? 'Create' : 'Update', ['class' => 'btn btn-success']) ?>
 	    </div>
 
 	    <?php ActiveForm::end(); ?>

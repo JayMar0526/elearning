@@ -115,6 +115,69 @@ class ExamController extends Controller
         ]);
     }
 
+    public function actionUpdateExam($id)
+    {
+
+        $model = Questions::findOne($id);
+        $modelsChoices = $model->questionChoices;
+
+        $modelTopic = $model->topic;
+
+        $searchModel = new QuestionsSearch();
+        $searchModel->topic_id = $model->topic_id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsChoices, 'id', 'id');
+            $modelsChoices = MultipleModel::createMultiple(QuestionChoices::classname(), $modelsChoices);
+            MultipleModel::loadMultiple($modelsChoices, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsChoices, 'id', 'id')));
+
+            // echo '<pre>';
+            // print_r(array_filter(ArrayHelper::map($modelsChoices, 'id', 'id')));
+            // print_r($oldIDs);
+            // print_r($deletedIDs);
+            // // print_r(ArrayHelper::map($modelsChoices, 'id', 'id'));
+            // exit;
+
+            // validate all models
+            $valid = $model->validate();
+            $valid = MultipleModel::validateMultiple($modelsChoices) && $valid;
+
+            $transaction = \Yii::$app->db->beginTransaction();
+            try {
+                if ($flag = $model->save()) {
+                    if (!empty($deletedIDs)) {
+                        QuestionChoices::deleteAll(['id' => $deletedIDs]);
+                    }
+                    foreach ($modelsChoices as $modelChoices) {
+                        $modelChoices->question_id = $model->id;
+                        if (! ($flag = $modelChoices->save())) {
+                            $transaction->rollBack();
+                            break;
+                        }
+                    }
+                }
+                if ($flag) {
+                    $transaction->commit();
+                    return $this->redirect(['create-exam', 'id' => $model->topic->id]);
+                }
+            } catch (Exception $e) {
+                $transaction->rollBack();
+            }
+        }
+
+        return $this->render('create-exam', [
+            'modelTopic' => $modelTopic,
+            'model' => $model,
+            'modelsChoices' => (empty($modelsChoices)) ? [new QuestionChoices] : $modelsChoices,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
 
     /**
      * Creates a new Questions model.
@@ -154,7 +217,7 @@ class ExamController extends Controller
 
                     if ($flag) {
                         $transaction->commit();
-                         return $this->redirect(Yii::$app->request->referrer);
+                        return $this->redirect(['create-exam', 'id' => $modelTopic->id]);
                     }
                 } catch (Exception $e) {
                     $transaction->rollBack();
